@@ -1,0 +1,51 @@
+~ LATIHAN => (Hima Project Organisasi) ~
+
+{Database}
+* Admin 
+ - Name
+ - Profile (default => avatar)
+ - Password
+ - jabatan
+
+1. User
+ - Name
+ - Profile (default => avatar)
+ - FK[divisi_id]
+ - Password
+ - jabatan (enum => kadiv, sekertaris, bendahara, anggota)
+
+2. Divisi 
+ - name
+ - ProfileImages
+ - deskripsi
+ - kadiv FK[user.name]
+
+3. Proker
+ - name
+ - tema
+ - status (enum => success, progress, cancel)
+ - ketuplak FK[user.name]
+ - FK[divisi_id]
+ - tanggal
+
+4. Seksi
+ - nama
+
+5. Kepanitiaan
+ - FK[seksi_id]
+ - FK[user_id]
+ - FK[proker_id]
+ - role (enum => koordinator, anggota)
+
+{Hak Akses}
+1. User (anggota)
+ - melihat data
+ - ekspor data
+
+2. user(not anggota)
+ - CRUD proker
+ - CRUD kepanitian
+
+3. admin
+ - CRUD user
+

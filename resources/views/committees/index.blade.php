@@ -3,7 +3,7 @@
 @section('content')
 <section class="section">
   <div class="section-header">
-    <h1>Pengurus</h1>
+    <h1>Kepanitiaan</h1>
   </div>
 
   <div class="section-body">
@@ -16,7 +16,7 @@
             data-toggle="modal"
             data-target="#exampleModal"
           >
-            <i class="fas fa-plus-circle"></i> Tambah Pengurus
+            <i class="fas fa-plus-circle"></i> Tambah Kepanitiaan
           </button>
         </div>
       </div>
@@ -36,28 +36,28 @@
         </div>
         @endif
         <div class="table-responsive">
-          <table class="table table-striped" id="table-1">
+          <table class="table table" id="table-1">
             <thead class="thead-dark">
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Divisi</th>
+                <th scope="col">Proker</th>
+                <th scope="col">Seksi</th>
+                <th scope="col">Pengurus</th>
                 <th scope="col">Jabatan</th>
                 <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody>
-              @forelse ($users as $user)
+              @forelse ($committees as $panitia)
                 <tr>
                   <th scope="row">{{ $loop->iteration }}</th>
-                  <td>{{ $user->name }}</td>
-                  <td>
-                    {{ $user->division_id ? $user->divisions->name : 'Edit data untuk menambahkan divisi' }}
-                  </td>
-                  <td>{{ $user->position }}</td>
+                  <td>{{ $panitia->tasks->name }}</td>
+                  <td>{{ $panitia->sections->name }}</td>
+                  <td>{{ $panitia->users->name }}</td>
+                  <td>{{ $panitia->role }}</td>
                   <td colspan="2">
-                    <a href="{{ route('pengurus.edit', $user->id) }}" class="btn btn-info"><i class="fas fa-pen"></i> Edit</a> | 
-                    <form action="{{ route('pengurus.destroy', $user->id) }}" method="post" class="d-inline">
+                    <a href="{{ route('kepanitiaan.edit', $panitia->id) }}" class="btn btn-info"><i class="fas fa-pen"></i> Edit</a> | 
+                    <form action="{{ route('kepanitiaan.destroy', $panitia->id) }}" method="post" class="d-inline">
                       @csrf
                       @method('delete')
                       <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i> Delete</button>
@@ -66,7 +66,7 @@
                 </tr>
               @empty
                 <tr>
-                  <td>Saat ini data belum tersedia</td>
+                  <td colspan="6" class="text-center">Saat ini data belum tersedia</td>
                 </tr>
               @endforelse
             </tbody>
@@ -79,7 +79,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Form Tambah Pengurus</h5>
+        <h5 class="modal-title">Form Tambah Kepanitiaan</h5>
         <button
           type="button"
           class="close"
@@ -90,31 +90,48 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="{{ route('pengurus.store') }}" method="POST">
+        <form action="{{ route('kepanitiaan.store') }}" method="POST">
           @csrf
           <div class="form-group">
-            <label>Your Name</label>
-            <input type="text" class="form-control" name="name" value="" required>
-            {{-- <div class="valid-feedback">
-            </div> --}}
-          </div>
-          <div class="form-group">
-            <label>Email</label>
-            <input type="email" class="form-control" name="email" required value="">
-          </div>
-          <div class="form-group">
-            <label>Jabatan</label>
-            <select class="form-control selectric" name="position">
-              <option disabled>Pilih Jabatan Divisi</option>
-              <option value="leader">Leader</option>
-              <option value="sekertariat">Sekertaris</option>
-              <option value="treasurer">Bendahara</option>
-              <option value="member">Member</option>
+            <label>Proker</label>
+            <select class="form-control selectric" name="task_id">
+              <option disabled selected>Pilih Program Kerja</option>
+              @forelse ($tasks as $proker)
+              <option value="{{ $proker->id }}">{{ $proker->name }}</option>
+              @empty
+              <option disabled>Data saat ini belum tersedia</option>
+              @endforelse
             </select>
           </div>
           <div class="form-group">
-            <label>Password</label>
-            <input type="password" name="password" class="form-control" required>
+            <label>Pengurus</label>
+            <select class="form-control selectric" name="user_id">
+              <option disabled selected>Pilih Pengurus</option>
+              @forelse ($users as $user)
+              <option value="{{ $user->id }}">{{ $user->name }}</option>
+              @empty
+              <option disabled>Data saat ini belum tersedia</option>
+              @endforelse
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Seksi</label>
+            <select class="form-control selectric" name="section_id">
+              <option disabled selected>Pilih Seksi</option>
+              @forelse ($sections as $seksi)
+              <option value="{{ $seksi->id }}">{{ $seksi->name }}</option>
+              @empty
+              <option disabled>Data saat ini belum tersedia</option>
+              @endforelse
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Jabatan</label>
+            <select class="form-control selectric" name="role">
+              <option disabled selected>Pilih Jabatan</option>
+              <option value="coordinator">Koordinator</option>
+              <option value="member">Anggota</option>
+            </select>
           </div>
           <button class="btn btn-primary">Submit</button>
         </form>

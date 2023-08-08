@@ -37,12 +37,18 @@ class DivisionController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|max:100',
-            'description' => 'required'
+            'description' => 'required',
+            'leader' => ''
         ]);
-
-        Division::create($validatedData);
-
-        return back()->with('success', 'Data divisi berhasil ditambahkan');
+        $result = Division::create($validatedData);
+        if (!$result->leader) {
+            return back()->with('success', 'Data divisi berhasil ditambahkan');
+        } else {
+            User::where('name', $validatedData['leader'])->update([
+                'division_id' => $result->id
+            ]);
+            return back()->with('success', 'Data divisi berhasil ditambahkan');
+        }
     }
 
     /**
@@ -76,7 +82,7 @@ class DivisionController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|max:100',
             'description' => 'required',
-            'leader' => 'required'
+            'leader' => ''
         ]);
 
         Division::findOrFail($id)->update($validatedData);

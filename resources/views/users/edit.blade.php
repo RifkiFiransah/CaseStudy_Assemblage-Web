@@ -34,8 +34,11 @@
                 <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Divisi</label>
                 <div class="col-sm-12 col-md-7">
                   <select class="form-control selectric" name="division_id">
+                    <option disabled {{ !$user->division_id ? 'selected' : '' }}>Pilih Divisi</option>
                     @forelse ($divisions as $divisi)
-                      <option value="{{ $divisi->id }}">{{ $divisi->name }}</option>
+                      <option value="{{ $divisi->id }}" {{ $divisi->id == $user->division_id ? 'selected' : '' }}>
+                        {{ $divisi->name }}
+                      </option>
                     @empty
                       <option disabled>Divisi Belum Tersedia</option>
                     @endforelse
@@ -63,6 +66,7 @@
                 <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
                 <div class="col-sm-12 col-md-7">
                   <button class="btn btn-primary" type="submit">Update</button>
+                  <a class="btn btn-danger ml-2" href="{{ route('pengurus.index') }}">Back</a>
                 </div>
               </div>
             </form>

@@ -15,23 +15,28 @@
           <a href="{{ route('dashboard') }}" class="nav-link"><i class="fas fa-fire"></i><span>Dashboard</span></a>
         </li>
         <li class="menu-header">Master</li>
+        <li class="nav-item dropdown {{ Request::is('pengurus*') ? 'active' : '' }}">
+          <a href="{{ route('pengurus.index') }}" class="nav-link"><i class="fas fa-users"></i>
+          <span>Pengurus</span></a>
+        </li>
         <li class="nav-item dropdown {{ Request::is('divisi*') ? 'active' : '' }}">
           <a href="{{ route('divisi.index') }}" class="nav-link"><i class="fas fa-school"></i> <span>Divisi</span></a>
         </li>
-        <li>
-          <a class="nav-link" href="blank.html"><i class="fas fa-book-open"></i>
-          <span>Proker</span></a></li>
-          <li class="nav-item dropdown">
-            <a href="#" class="nav-link"><i class="fas fa-list"></i>
-              <span>Seksi-seksi</span></a>
+        <li class="nav-item dropdown {{ Request::is('proker*') ? 'active' : '' }}">
+          <a class="nav-link" href="{{ route('proker.index') }}"><i class="fas fa-book-open"></i>
+          <span>Proker</span></a>
+        </li>
+        <li class="nav-item dropdown {{ Request::is('seksi-seksi*') ? 'active' : '' }}">
+          <a href="{{ route('seksi-seksi.index') }}" class="nav-link"><i class="fas fa-list"></i>
+            <span>Seksi-seksi</span></a>
+        </li>
+        <li class="nav-item dropdown {{ Request::is('kepanitiaan*') ? 'active' : '' }}">
+          <a href="{{ route('kepanitiaan.index') }}" class="nav-link"><i class="fas fa-book-reader"></i>
+            <span>Kepanitiaan</span></a>
         </li>
         <li class="nav-item dropdown">
           <a href="#" class="nav-link"><i class="fas fa-pencil-ruler"></i>
             <span>Aktivitas</span></a>
-        </li>
-        <li class="nav-item dropdown {{ Request::is('pengurus*') ? 'active' : '' }}">
-          <a href="{{ route('pengurus.index') }}" class="nav-link"><i class="fas fa-users"></i>
-          <span>Pengurus</span></a>
         </li>
         <li class="menu-header">Personal</li>
         <li class="nav-item dropdown">

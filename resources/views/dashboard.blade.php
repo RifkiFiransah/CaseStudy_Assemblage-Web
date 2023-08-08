@@ -16,7 +16,7 @@
             <h4>Total Pengurus</h4>
           </div>
           <div class="card-body">
-            10
+            {{ $users->count() }}
           </div>
         </div>
       </div>
@@ -31,7 +31,7 @@
             <h4>Divisi</h4>
           </div>
           <div class="card-body">
-            42
+            {{ $divisions->count() }}
           </div>
         </div>
       </div>

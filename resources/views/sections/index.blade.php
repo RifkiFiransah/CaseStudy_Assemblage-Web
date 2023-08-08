@@ -3,7 +3,7 @@
 @section('content')
   <section class="section">
     <div class="section-header">
-      <h1>Divisi</h1>
+      <h1>Seksi - seksi</h1>
     </div>
 
     <div class="section-body">
@@ -16,7 +16,7 @@
               data-toggle="modal"
               data-target="#exampleModal"
             >
-              <i class="fas fa-plus-circle"></i> Tambah Divisi
+              <i class="fas fa-plus-circle"></i> Tambah Seksi
             </button>
           </div>
         </div>
@@ -39,24 +39,18 @@
             <thead class="thead-dark">
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">Name Divisi</th>
-                <th scope="col" style="width: 300px">Deskripsi</th>
-                <th scope="col" style="width: 220px">Kepala Divisi</th>
-                <th scope="col" style="width: 220px">Action</th>
+                <th scope="col">Nama Seksi</th>
+                <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody>
-              @forelse ($divisions as $divisi)
+              @forelse ($sections as $seksi)
                 <tr>
                   <td>{{ $loop->iteration }}</td>
-                  <td>{{ $divisi->name }}</td>
-                  <td>{!! $divisi->description !!}</td>
+                  <td>{{ $seksi->name }}</td>
                   <td>
-                    {{ $divisi->leader ? $divisi->leader : 'Edit untuk menambahkan kepala divisi' }}
-                  </td>
-                  <td>
-                    <a href="{{ route('divisi.edit', $divisi->id) }}" class="btn btn-info"><i class="fas fa-pen"></i> Edit</a> | 
-                    <form action="{{ route('divisi.destroy', $divisi->id) }}" method="post" class="d-inline">
+                    <a href="{{ route('seksi-seksi.edit', $seksi->id) }}" class="btn btn-info"><i class="fas fa-pen"></i> Edit</a> | 
+                    <form action="{{ route('seksi-seksi.destroy', $seksi->id) }}" method="post" class="d-inline">
                       @csrf
                       @method('delete')
                       <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i> Delete</button>
@@ -65,7 +59,7 @@
                 </tr>
               @empty
                 <tr>
-                  <td>Data Divisi saat ini belum tersedia</td>
+                  <td colspan="3" class="text-center">Data saat ini belum tersedia</td>
                 </tr>
               @endforelse
             </tbody>
@@ -79,7 +73,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Form Tambah Divisi</h5>
+          <h5 class="modal-title">Form Tambah Seksi</h5>
           <button
             type="button"
             class="close"
@@ -90,28 +84,11 @@
           </button>
         </div>
         <div class="modal-body">
-          <form action="{{ route('divisi.store') }}" method="POST">
+          <form action="{{ route('seksi-seksi.store') }}" method="POST">
             @csrf
             <div class="form-group">
-              <label>Nama Divisi</label>
+              <label>Nama Seksi</label>
               <input type="text" class="form-control" name="name" value="" required>
-              {{-- <div class="valid-feedback">
-              </div> --}}
-            </div>
-            <div class="form-group">
-              <label>kepala Divisi</label>
-              <select class="form-control selectric" name="leader">
-                <option disabled selected>Pilih Kepala Divisi</option>
-                @forelse ($users as $user)
-                <option value="{{ $user->name }}">{{ $user->name }}</option>
-                @empty
-                <option disabled>Kepala Divisi Belum Tersedia</option>
-                @endforelse
-              </select>
-            </div>
-            <div class="form-group">
-              <label>Deskripsi</label>
-              <textarea class="summernote-simple" name="description" required></textarea>
             </div>
             <button class="btn btn-primary">Submit</button>
           </form>

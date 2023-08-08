@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Division;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Mockery\Undefined;
 
 class PengurusController extends Controller
 {
@@ -39,9 +40,7 @@ class PengurusController extends Controller
             'position' => 'required',
             'password' => 'required|min:5',
         ]);
-
         User::create($validatedData);
-
         return back()->with('success', 'Berhasil menambahkan pengurus baru');
     }
 
@@ -74,10 +73,16 @@ class PengurusController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|min:3|max:100',
             'email' => 'required|email',
-            'position' => 'required'
+            'position' => 'required',
+            'division_id' => ''
         ]);
-        $validatedData['division_id'] = $request->input('division_id');
+        // $validatedData['division_id'] = $request->input('division_id');
 
+        if ($validatedData['position'] == 'leader' && $request->input('division_id')) {
+            Division::where('id', $validatedData['division_id'])->update([
+                'leader' => $validatedData['name']
+            ]);
+        }
         User::where('id', $id)->update($validatedData);
 
         return redirect('/pengurus')->with('success', 'Data Pengurus berhasil diperbarui');

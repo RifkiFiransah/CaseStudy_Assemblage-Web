@@ -11,6 +11,8 @@
 <link rel="stylesheet" href="{{ asset('./assets/modules/weathericons/css/weather-icons.min.css') }}">
 <link rel="stylesheet" href="{{ asset('./assets/modules/weathericons/css/weather-icons-wind.min.css') }}">
 <link rel="stylesheet" href="{{ asset('./assets/modules/summernote/dist/summernote-bs4.css') }}">
+<link rel="stylesheet" href="{{ asset('./assets/modules/datatables.net-bs4/css/dataTables.bootstrap4.min.css')}}">
+<link rel="stylesheet" href="{{ asset('./assets/modules/datatables.net-select-bs4/css/select.bootstrap4.min.css')}}">
 
 <!-- Template CSS -->
 <link rel="stylesheet" href="{{ asset('./assets/css/style.css') }}">

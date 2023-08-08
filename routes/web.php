@@ -1,7 +1,11 @@
 <?php
 
+use App\Http\Controllers\CommitteeController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DivisionController;
 use App\Http\Controllers\PengurusController;
+use App\Http\Controllers\SectionController;
+use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,12 +23,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard', [
-        'title' => 'Dashboard'
-    ]);
-})->name('dashboard');
-
 Route::get('/home', function () {
     return view('home', [
         'title' => 'Home'
@@ -32,6 +30,11 @@ Route::get('/home', function () {
 })->name('home');
 
 Route::middleware('guest')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
     Route::resource('/pengurus', PengurusController::class)->except(['show', 'create']);
     Route::resource('/divisi', DivisionController::class)->except(['show', 'create']);
+    Route::resource('/proker', TaskController::class)->except(['show', 'create']);
+    Route::resource('/seksi-seksi', SectionController::class)->except(['show', 'create']);
+    Route::resource('/kepanitiaan', CommitteeController::class)->except(['show', 'create']);
 });

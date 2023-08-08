@@ -28,8 +28,13 @@
                 <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Kepala Divisi</label>
                 <div class="col-sm-12 col-md-7">
                   <select class="form-control selectric" name="leader">
+                    <option disabled {{ !$divisi->leader ? 'selected' : '' }}>Pilih Kepala Divisi</option>
                     @forelse ($users as $user)
-                      <option value="{{ $user->name }}">{{ $user->name }}</option>
+                      @if ($divisi->leader == $user->name)
+                        <option value="{{ $user->name }}" selected>{{ $user->name }}</option>
+                      @else  
+                        <option value="{{ $user->name }}">{{ $user->name }}</option>     
+                      @endif
                     @empty
                       <option disabled>Kepala Divisi Belum Tersedia</option>
                     @endforelse
@@ -42,16 +47,11 @@
                   <textarea class="summernote-simple" name="description" required>{{ $divisi->description }}</textarea>
                 </div>
               </div>
-              {{-- <div class="form-group row mb-4">
-                <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Content</label>
-                <div class="col-sm-12 col-md-7">
-                  <textarea class="summernote-simple"></textarea>
-                </div>
-              </div> --}}
               <div class="form-group row mb-4">
                 <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
                 <div class="col-sm-12 col-md-7">
                   <button class="btn btn-primary" type="submit">Update</button>
+                  <a class="btn btn-danger ml-2" href="{{ route('divisi.index') }}">Back</a>
                 </div>
               </div>
             </form>

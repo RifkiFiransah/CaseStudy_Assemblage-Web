@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('tema')->nullable();
-            $table->enum('status', ['success', 'progress', 'cancel'])->default('progress');
-            $table->foreignId('user_id')->default('1');
-            $table->foreignId('division_id')->default('1');
+            $table->enum('status', ['success', 'progress', 'cancel'])->nullable()->default('progress');
+            $table->foreignId('user_id')->nullable()->default('1');
+            $table->foreignId('division_id')->nullable()->default('1');
             $table->date('tanggal')->nullable();
             $table->timestamps();
         });

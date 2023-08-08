@@ -4,7 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Committee extends Model
 {
@@ -12,18 +14,18 @@ class Committee extends Model
 
     protected $guarded = ['id'];
 
-    public function users(): HasMany
+    public function users(): BelongsTo
     {
-        return $this->hasMany(User::class, 'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function sections(): HasMany
+    public function sections(): BelongsTo
     {
-        return $this->hasMany(Section::class, 'section_id');
+        return $this->belongsTo(Section::class, 'section_id');
     }
 
-    public function tasks(): HasMany
+    public function tasks(): BelongsTo
     {
-        return $this->hasMany(Task::class, 'task_id');
+        return $this->belongsTo(Task::class, 'task_id');
     }
 }

@@ -22,6 +22,25 @@
   <!-- Template CSS -->
   <link rel="stylesheet" href="{{ asset('./assets/css/style.css') }}">
   <link rel="stylesheet" href="{{ asset('./assets/css/components.css') }}">
+
+  <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.21/dist/sweetalert2.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.21/dist/sweetalert2.all.min.js"></script>
+  <style>
+    .colored-toast.swal2-icon-success {
+      background-color: #a5dc86 !important;
+    }
+    .colored-toast .swal2-title {
+      color: white;
+    }
+
+    .colored-toast .swal2-close {
+      color: white;
+    }
+
+    .colored-toast .swal2-html-container {
+      color: white;
+    }
+  </style>
 </head>
 
 <body>
@@ -81,6 +100,25 @@
     {{-- @include('layouts.script') --}}
 
   @stack('script')
-
+  @if (session()->has('success'))
+  <script>
+    // swal('Berhasil', `{{ session('success') }}`, 'success');
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-right',
+      iconColor: 'white',
+      customClass: {
+        popup: 'colored-toast'
+      },
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true
+    })
+    Toast.fire({
+      icon: 'success',
+      title: '{{ session('success') }}'
+    })
+  </script>
+  @endif
 </body>
 </html>

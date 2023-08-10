@@ -21,20 +21,6 @@
           </div>
         </div>
         <div class="card-body">
-          @if (session()->has('success'))
-          <div class="row">
-            <div class="col-md-4">
-              <div class="alert alert-success alert-dismissible show fade">
-                <div class="alert-body">
-                  <button class="close" data-dismiss="alert">
-                    <span>&times;</span>
-                  </button>
-                  {{ session('success') }}
-                </div>
-              </div>
-            </div>
-          </div>
-          @endif
           <div class="table-responsive">
             <table class="table">
               <thead class="thead-dark">
@@ -116,17 +102,11 @@ let count = {{ count($sections) }};
         }).then((willDelete) => {
           if (willDelete) {
           form.submit();
-          // swal('Poof! Your imaginary file has been deleted!', {
-          //   icon: 'success',
-          // });
-          // } else {
-          // swal('Your imaginary file is safe!');
           }
         });
     });
   }
 </script>
-
 @if (session()->has('success'))
 <script>
   swal('Berhasil', `{{ session('success') }}`, 'success');

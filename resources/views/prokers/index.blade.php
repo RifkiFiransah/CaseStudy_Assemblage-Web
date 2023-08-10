@@ -69,7 +69,7 @@
                     <form action="{{ route('proker.destroy', $proker->id) }}" method="post" class="d-inline">
                       @csrf
                       @method('delete')
-                      <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i> Delete</button>
+                      <button type="submit" class="btn btn-danger" id="delete-{{ $loop->iteration }}"><i class="fas fa-trash"></i> Delete</button>
                     </form>
                   </td>
                 </tr>
@@ -149,3 +149,33 @@
   </div>
 </div>
 @endsection
+
+@push('script')
+<script>
+let count = {{ count($tasks) }};
+  for (let i = 1; i <= count; i++) {
+    $(`#delete-${i}`).click(function(e) {
+      let form = $(this).closest('form');
+      e.preventDefault();
+      swal({
+          title: 'Are you sure?',
+          text: 'Once deleted, you will not be able to recover this imaginary file!',
+          icon: 'warning',
+          buttons: true,
+          dangerMode: true,
+        }).then((willDelete) => {
+          if (willDelete) {
+          form.submit();
+          }
+        });
+    });
+  }
+
+</script>
+
+@if (session()->has('success'))
+<script>
+  swal('Berhasil', `{{ session('success') }}`, 'success');
+</script>
+@endif
+@endpush

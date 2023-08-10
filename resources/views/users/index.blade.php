@@ -21,20 +21,6 @@
         </div>
       </div>
       <div class="card-body">
-        @if (session()->has('success'))
-        <div class="row">
-          <div class="col-md-4">
-            <div class="alert alert-success alert-dismissible show fade">
-              <div class="alert-body">
-                <button class="close" data-dismiss="alert">
-                  <span>&times;</span>
-                </button>
-                {{ session('success') }}
-              </div>
-            </div>
-          </div>
-        </div>
-        @endif
         <div class="table-responsive">
           <table class="table table-striped" id="table-1">
             <thead class="thead-dark">
@@ -60,7 +46,7 @@
                     <form action="{{ route('pengurus.destroy', $user->id) }}" method="post" class="d-inline">
                       @csrf
                       @method('delete')
-                      <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i> Delete</button>
+                      <button type="submit" class="btn btn-danger" id="delete-{{ $loop->iteration }}"><i class="fas fa-trash"></i> Delete</button>
                     </form>
                   </td>
                 </tr>
@@ -105,11 +91,11 @@
           <div class="form-group">
             <label>Jabatan</label>
             <select class="form-control selectric" name="position">
-              <option disabled>Pilih Jabatan Divisi</option>
-              <option value="leader">Leader</option>
+              <option disabled selected>Pilih Jabatan</option>
               <option value="sekertariat">Sekertaris</option>
               <option value="treasurer">Bendahara</option>
               <option value="member">Member</option>
+              <option value="leader">Leader</option>
             </select>
           </div>
           <div class="form-group">
@@ -122,15 +108,38 @@
     </div>
   </div>
 </div>
+@endsection
+
+@push('script')
+<script>
+  let count = {{ count($users) }};
+  for (let i = 1; i <= count; i++) {
+    $(`#delete-${i}`).click(function(e) {
+      let form = $(this).closest('form');
+      e.preventDefault();
+      swal({
+          title: 'Are you sure?',
+          text: 'Once deleted, you will not be able to recover this imaginary file!',
+          icon: 'warning',
+          buttons: true,
+          dangerMode: true,
+        }).then((willDelete) => {
+          if (willDelete) {
+          form.submit();
+          // swal('Poof! Your imaginary file has been deleted!', {
+          //   icon: 'success',
+          // });
+          // } else {
+          // swal('Your imaginary file is safe!');
+          }
+        });
+    });
+  }
+</script>
 
 @if (session()->has('success'))
-  <script>
-    Swal.fire({
-      title: 'Success!',
-      text: 'Do you want to continue',
-      icon: 'success',
-    })
-  </script>
+<script>
+  swal('Berhasil', `{{ session('success') }}`, 'success');
+</script>
 @endif
-
-@endsection
+@endpush

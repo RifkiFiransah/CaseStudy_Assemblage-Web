@@ -35,41 +35,39 @@
             </div>
           </div>
           @endif
-          <table class="table">
-            <thead class="thead-dark">
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Name Divisi</th>
-                <th scope="col" style="width: 300px">Deskripsi</th>
-                <th scope="col" style="width: 220px">Kepala Divisi</th>
-                <th scope="col" style="width: 220px">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              @forelse ($divisions as $divisi)
+          <div class="table-responsive">
+            <table class="table">
+              <thead class="thead-dark">
                 <tr>
-                  <td>{{ $loop->iteration }}</td>
-                  <td>{{ $divisi->name }}</td>
-                  <td>{!! $divisi->description !!}</td>
-                  <td>
-                    {{ $divisi->leader ? $divisi->leader : 'Edit untuk menambahkan kepala divisi' }}
-                  </td>
-                  <td>
-                    <a href="{{ route('divisi.edit', $divisi->id) }}" class="btn btn-info"><i class="fas fa-pen"></i> Edit</a> | 
-                    <form action="{{ route('divisi.destroy', $divisi->id) }}" method="post" class="d-inline">
-                      @csrf
-                      @method('delete')
-                      <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i> Delete</button>
-                    </form>
-                  </td>
+                  <th scope="col">#</th>
+                  <th scope="col">Name Divisi</th>
+                  <th scope="col" style="width: 300px">Deskripsi</th>
+                  <th scope="col" style="width: 220px">Kepala Divisi</th>
+                  <th scope="col" style="width: 220px">Action</th>
                 </tr>
-              @empty
-                <tr>
-                  <td>Data Divisi saat ini belum tersedia</td>
-                </tr>
-              @endforelse
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                @foreach ($divisions as $divisi)
+                  <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $divisi->name }}</td>
+                    <td>{!! $divisi->description !!}</td>
+                    <td>
+                      {{ $divisi->leader ? $divisi->leader : 'Edit untuk menambahkan kepala divisi' }}
+                    </td>
+                    <td>
+                      <a href="{{ route('divisi.edit', $divisi->id) }}" class="btn btn-info"><i class="fas fa-pen"></i> Edit</a> | 
+                      <form action="{{ route('divisi.destroy', $divisi->id) }}" method="post" class="d-inline">
+                        @csrf
+                        @method('delete')
+                        <button type="submit" class="btn btn-danger" id="delete-{{ $loop->iteration }}"><i class="fas fa-trash"></i> Delete</button>
+                      </form>
+                    </td>
+                  </tr>
+                @endforeach
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
@@ -120,3 +118,31 @@
     </div>
   </div>
 @endsection
+@push('script')
+<script>
+  let count = {{ count($divisions) }};
+  for (let i = 1; i <= count; i++) {
+    $(`#delete-${i}`).click(function(e) {
+      let form = $(this).closest('form');
+      e.preventDefault();
+      swal({
+          title: 'Are you sure?',
+          text: 'Once deleted, you will not be able to recover this imaginary file!',
+          icon: 'warning',
+          buttons: true,
+          dangerMode: true,
+        }).then((willDelete) => {
+          if (willDelete) {
+          form.submit();
+          }
+        });
+    });
+  }
+</script>
+
+@if (session()->has('success'))
+<script>
+  swal('Berhasil', `{{ session('success') }}`, 'success');
+</script>
+@endif
+@endpush

@@ -14,7 +14,7 @@ class PengurusController extends Controller
      */
     public function index()
     {
-        $users = User::orderBy('id', 'desc')->get();
+        $users = User::orderBy('id', 'asc')->get();
         return view('users.index', [
             'title' => 'Pengurus',
             'users' => $users
@@ -34,13 +34,18 @@ class PengurusController extends Controller
      */
     public function store(Request $request)
     {
+        // ddd($request);
         $validatedData = $request->validate([
             'name' => 'required|unique:users|max:100',
             'email' => 'required|email',
-            'position' => 'required',
+            'position' => 'required|min:5',
             'password' => 'required|min:5',
         ]);
-        User::create($validatedData);
+        $validatedData['password'] = bcrypt($request->input('password'));
+        $validatedData['created_at'] = now();
+        $validatedData['updated_at'] = now();
+        // ddd($validatedData);
+        User::insert($validatedData);
         return back()->with('success', 'Berhasil menambahkan pengurus baru');
     }
 

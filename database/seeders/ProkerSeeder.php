@@ -16,7 +16,8 @@ class ProkerSeeder extends Seeder
         Task::create(
             [
                 "name" => "Anjang Sono",
-                "status" => "progress",
+                "tema" => "Anjang Sono Mempererat Tali Silaturahmi",
+                "status" => "cancel",
                 "user_id" => "2",
                 "division_id" => "1",
                 "tanggal" => "2023-09-12"
@@ -25,6 +26,7 @@ class ProkerSeeder extends Seeder
 
         Task::create([
             "name" => "Makrab",
+            "tema" => "Menyatukan asa kebersamaan",
             "status" => "success",
             "user_id" => "5",
             "division_id" => "1",
@@ -33,6 +35,7 @@ class ProkerSeeder extends Seeder
 
         Task::create([
             "name" => "Pengabdian Masyarakat",
+            "tema" => "Meningkatkan UMKM di era Society 5.0",
             "status" => "success",
             "user_id" => "3",
             "division_id" => "5",
@@ -41,7 +44,8 @@ class ProkerSeeder extends Seeder
 
         Task::create([
             "name" => "Malam Bina Iman dan Taqwa",
-            "status" => "progress",
+            "tema" => "Meningkatkan Keimanan dan Ketaqwaan",
+            "status" => "cancel",
             "user_id" => "1",
             "division_id" => "2",
             "tanggal" => "2023-07-18"

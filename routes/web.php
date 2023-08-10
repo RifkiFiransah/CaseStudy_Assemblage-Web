@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActivitiesController;
 use App\Http\Controllers\CommitteeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DivisionController;
@@ -31,6 +32,8 @@ Route::get('/home', function () {
 
 Route::middleware('guest')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/aktivitas', [ActivitiesController::class, 'index'])->name('aktivitas');
+    Route::get('/calendar', [ActivitiesController::class, 'calendar'])->name('calendar');
 
     Route::resource('/pengurus', PengurusController::class)->except(['show', 'create']);
     Route::resource('/divisi', DivisionController::class)->except(['show', 'create']);

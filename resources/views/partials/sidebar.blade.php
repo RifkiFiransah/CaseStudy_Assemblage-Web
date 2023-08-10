@@ -34,8 +34,8 @@
           <a href="{{ route('kepanitiaan.index') }}" class="nav-link"><i class="fas fa-book-reader"></i>
             <span>Kepanitiaan</span></a>
         </li>
-        <li class="nav-item dropdown">
-          <a href="#" class="nav-link"><i class="fas fa-pencil-ruler"></i>
+        <li class="nav-item dropdown {{ Request::is('aktivitas*') ? 'active' : '' }}">
+          <a href="{{ route('aktivitas') }}" class="nav-link"><i class="fas fa-pencil-ruler"></i>
             <span>Aktivitas</span></a>
         </li>
         <li class="menu-header">Personal</li>

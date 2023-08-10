@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="{{ asset('./assets/modules/summernote/dist/summernote-bs4.css') }}">
   <link rel="stylesheet" href="{{ asset('./assets/modules/datatables.net-bs4/css/dataTables.bootstrap4.min.css')}}">
   <link rel="stylesheet" href="{{ asset('./assets/modules/datatables.net-select-bs4/css/select.bootstrap4.min.css')}}">
+  <link rel="stylesheet" href="{{ asset('./assets/modules/fullcalendar/dist/fullcalendar.min.css') }}">
 
   <!-- Template CSS -->
   <link rel="stylesheet" href="{{ asset('./assets/css/style.css') }}">
@@ -85,18 +86,20 @@
   <script src="{{ asset('./assets/modules/datatables/media/js/jquery.dataTables.min.js') }}"></script>
   <script src="{{ asset('./assets/modules/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
   <script src="{{ asset('./assets/modules/datatables.net-select-bs4/js/select.bootstrap4.min.js') }}"></script>
+  <script src="{{ asset('./assets/modules/fullcalendar/dist/fullcalendar.min.js') }}"></script>
+  <script src="{{ asset('./assets/modules/chart.js/dist/Chart.min.js') }}"></script>
 
   <!-- Template JS File -->
   <script src="{{ asset('./assets/js/scripts.js') }}"></script>
   <script src="{{ asset('./assets/js/custom.js') }}"></script>
 
   <!-- Page Specific JS File -->
-  <script src="{{ asset('./assets/js/page/index-0.js') }}"></script>
   <script src="{{ asset('./assets/js/page/bootstrap-modal.js') }}"></script>
-  {{-- <script src="{{ asset('./assets/js/page/modules-sweetalert.js') }}"></script> --}}
 
   <!-- Page Specific JS File -->
   <script src="{{ asset('./assets/js/page/modules-datatables.js') }}"></script>
+  {{-- <script src="{{ asset('./assets/js/page/modules-chartjs.js') }}"></script> --}}
+
     {{-- @include('layouts.script') --}}
 
   @stack('script')

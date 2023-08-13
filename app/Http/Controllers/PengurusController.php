@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Division;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Mockery\Undefined;
 
 class PengurusController extends Controller
 {
@@ -14,7 +13,7 @@ class PengurusController extends Controller
      */
     public function index()
     {
-        $users = User::orderBy('id', 'asc')->get();
+        $users = User::with(['divisions'])->latest()->get();
         return view('users.index', [
             'title' => 'Pengurus',
             'users' => $users
@@ -39,9 +38,8 @@ class PengurusController extends Controller
             'name' => 'required|unique:users|max:100',
             'email' => 'required|email',
             'position' => 'required|min:5',
-            'password' => 'required|min:5',
         ]);
-        $validatedData['password'] = bcrypt($request->input('password'));
+        $validatedData['password'] = bcrypt($request->input('position') . "123");
         $validatedData['created_at'] = now();
         $validatedData['updated_at'] = now();
         // ddd($validatedData);
@@ -61,6 +59,7 @@ class PengurusController extends Controller
      */
     public function edit(string $id)
     {
+
         $user = User::findOrFail($id);
         $divisions = Division::all();
         return view('users.edit', [

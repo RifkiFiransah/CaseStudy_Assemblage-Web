@@ -41,13 +41,20 @@
                     {{ $user->division_id ? $user->divisions->name : 'Edit data untuk menambahkan divisi' }}
                   </td>
                   <td>{{ $user->position }}</td>
-                  <td colspan="2">
+                  <td colspan="3">
+                    @can('show')
+                    <a href="{{ route('pengurus.show', $user->id) }}" class="btn btn-success"><i class="fas fa-eye"></i> Detail</a> | 
+                    @endcan
+                    @can('update')
                     <a href="{{ route('pengurus.edit', $user->id) }}" class="btn btn-info"><i class="fas fa-pen"></i> Edit</a> | 
+                    @endcan
+                    @can('delete')
                     <form action="{{ route('pengurus.destroy', $user->id) }}" method="post" class="d-inline">
                       @csrf
                       @method('delete')
                       <button type="submit" class="btn btn-danger" id="delete-{{ $loop->iteration }}"><i class="fas fa-trash"></i> Delete</button>
                     </form>
+                    @endcan
                   </td>
                 </tr>
               @empty
@@ -97,10 +104,6 @@
               <option value="member">Member</option>
               <option value="leader">Leader</option>
             </select>
-          </div>
-          <div class="form-group">
-            <label>Password</label>
-            <input type="password" name="password" class="form-control" required>
           </div>
           <button class="btn btn-primary">Submit</button>
         </form>

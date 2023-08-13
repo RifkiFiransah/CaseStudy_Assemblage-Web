@@ -35,13 +35,20 @@
                   <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $seksi->name }}</td>
-                    <td>
+                    <td colspan="3">
+                      @can('show')
+                      <a href="{{ route('seksi-seksi.show', $seksi->id) }}" class="btn btn-success"><i class="fas fa-eye"></i> Detail</a> |
+                      @endcan
+                      @can('update')
                       <a href="{{ route('seksi-seksi.edit', $seksi->id) }}" class="btn btn-info"><i class="fas fa-pen"></i> Edit</a> | 
+                      @endcan
+                      @can('delete')
                       <form action="{{ route('seksi-seksi.destroy', $seksi->id) }}" method="post" class="d-inline">
                         @csrf
                         @method('delete')
                         <button type="submit" class="btn btn-danger" id="delete-{{ $seksi->id }}"><i class="fas fa-trash"></i> Delete</button>
                       </form>
+                      @endcan
                     </td>
                   </tr>
                 @empty

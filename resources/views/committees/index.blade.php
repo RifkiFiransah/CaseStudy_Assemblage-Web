@@ -41,13 +41,20 @@
                   <td>{{ $panitia->sections->name }}</td>
                   <td>{{ $panitia->users->name }}</td>
                   <td>{{ $panitia->role }}</td>
-                  <td colspan="2">
+                  <td colspan="3">
+                    @can('show')
+                    <a href="{{ route('kepanitiaan.show', $panitia->id) }}" class="btn btn-success"><i class="fas fa-eye"></i> Detail</a> |
+                    @endcan
+                    @can('update')
                     <a href="{{ route('kepanitiaan.edit', $panitia->id) }}" class="btn btn-info"><i class="fas fa-pen"></i> Edit</a> | 
+                    @endcan
+                    @can('delete')
                     <form action="{{ route('kepanitiaan.destroy', $panitia->id) }}" method="post" class="d-inline">
                       @csrf
                       @method('delete')
                       <button type="submit" class="btn btn-danger" id="delete-{{ $loop->iteration }}"><i class="fas fa-trash"></i> Delete</button>
                     </form>
+                    @endcan
                   </td>
                 </tr>
               @empty

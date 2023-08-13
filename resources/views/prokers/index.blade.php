@@ -50,13 +50,19 @@
                   @endswitch
                   <td>{{ $proker->tanggal }}</td>
                   <td colspan="2">
-                    <a href="{{ route('proker.edit', $proker->id) }}" class="btn btn-success"><i class="fas fa-users"></i> Kepanitian</a> | 
+                    @can('show')
+                    <a href="{{ route('proker.show', $proker->id) }}" class="btn btn-success"><i class="fas fa-users"></i> Kepanitian</a> | 
+                    @endcan
+                    @can('update')
                     <a href="{{ route('proker.edit', $proker->id) }}" class="btn btn-info"><i class="fas fa-pen"></i> Edit</a> | 
+                    @endcan
+                    @can('delete')
                     <form action="{{ route('proker.destroy', $proker->id) }}" method="post" class="d-inline">
                       @csrf
                       @method('delete')
                       <button type="submit" class="btn btn-danger" id="delete-{{ $loop->iteration }}"><i class="fas fa-trash"></i> Delete</button>
                     </form>
+                    @endcan
                   </td>
                 </tr>
               @empty

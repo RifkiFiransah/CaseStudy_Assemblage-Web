@@ -39,14 +39,17 @@
             <span>Aktivitas</span></a>
         </li>
         <li class="menu-header">Personal</li>
-        <li class="nav-item dropdown">
-          <a href="#" class="nav-link"><i class="far fa-user"></i>
+        <li class="nav-item dropdown {{ Request::is('profile*') ? 'active' : '' }}">
+          <a href="{{ route('profil.index') }}" class="nav-link"><i class="far fa-user"></i>
           <span>Profile</span></a>
         </li>
         <li class="nav-item dropdown">
-          <a href="#" class="dropdown-item has-icon text-danger">
-            <i class="fas fa-sign-out-alt"></i> Logout
-          </a>
+          <form action="{{ route('logout') }}" method="post" class="d-inline">
+            @csrf
+            <button type="submit" class="dropdown-item text-danger border-0">
+              <i class="fas fa-sign-out-alt ml-1 mr-3"></i> Logout
+            </button>
+          </form>
         </li>
       </ul>
 

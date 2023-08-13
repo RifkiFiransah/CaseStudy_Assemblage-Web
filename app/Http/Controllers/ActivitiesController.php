@@ -9,7 +9,7 @@ class ActivitiesController extends Controller
 {
     public function index()
     {
-        $tasks = Task::where('status', 'success')->orWhere('status', 'cancel')->orderBy('updated_at', 'desc')->get();
+        $tasks = Task::with(['users', 'divisions'])->where('status', 'success')->orWhere('status', 'cancel')->orderBy('updated_at', 'desc')->get();
         return view('activities.index', [
             'title' => 'Activitas',
             'tasks' => $tasks
@@ -18,7 +18,7 @@ class ActivitiesController extends Controller
 
     public function calendar()
     {
-        $tasks = Task::where('status', 'success')->orWhere('status', 'cancel')->orderBy('updated_at', 'desc')->get();
+        $tasks = Task::with(['users', 'divisions'])->where('status', 'success')->orWhere('status', 'cancel')->orderBy('updated_at', 'desc')->get();
         return view('activities.calendar', [
             'title' => 'Kalender',
             'tasks' => $tasks

@@ -18,7 +18,7 @@ class CommitteeController extends Controller
         $sections = Section::orderBy('name')->get();
         $users = User::orderBy('name')->where('position', 'leader')->orWhere('position', 'member')->get();
         $tasks = Task::orderBy('name')->get();
-        $committees = Committee::latest()->get();
+        $committees = Committee::with(['users', 'tasks', 'sections'])->latest()->get();
         return view('committees.index', [
             'title' => 'Kepanitiaan Proker',
             'sections' => $sections,

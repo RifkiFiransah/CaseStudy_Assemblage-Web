@@ -19,6 +19,8 @@
   <link rel="stylesheet" href="{{ asset('./assets/modules/datatables.net-bs4/css/dataTables.bootstrap4.min.css')}}">
   <link rel="stylesheet" href="{{ asset('./assets/modules/datatables.net-select-bs4/css/select.bootstrap4.min.css')}}">
   <link rel="stylesheet" href="{{ asset('./assets/modules/fullcalendar/dist/fullcalendar.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('./assets/modules/bootstrap-social/bootstrap-social.css') }}">
+
 
   <!-- Template CSS -->
   <link rel="stylesheet" href="{{ asset('./assets/css/style.css') }}">

@@ -27,9 +27,9 @@
                 <tr>
                   <th scope="col">#</th>
                   <th scope="col">Name Divisi</th>
-                  <th scope="col" style="width: 300px">Deskripsi</th>
+                  <th scope="col" style="width: 250px">Deskripsi</th>
                   <th scope="col" style="width: 220px">Kepala Divisi</th>
-                  <th scope="col" style="width: 220px">Action</th>
+                  <th scope="col">Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -41,13 +41,20 @@
                     <td>
                       {{ $divisi->leader ? $divisi->leader : 'Edit untuk menambahkan kepala divisi' }}
                     </td>
-                    <td>
+                    <td colspan="3">
+                      @can('show')
+                      <a href="{{ route('divisi.show', $divisi->id) }}" class="btn btn-success"><i class="fas fa-eye"></i> Detail</a> | 
+                      @endcan
+                      @can('update')
                       <a href="{{ route('divisi.edit', $divisi->id) }}" class="btn btn-info"><i class="fas fa-pen"></i> Edit</a> | 
+                      @endcan
+                      @can('delete')
                       <form action="{{ route('divisi.destroy', $divisi->id) }}" method="post" class="d-inline">
                         @csrf
                         @method('delete')
                         <button type="submit" class="btn btn-danger" id="delete-{{ $loop->iteration }}"><i class="fas fa-trash"></i> Delete</button>
                       </form>
+                      @endcan
                     </td>
                   </tr>
                 @endforeach

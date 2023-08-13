@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('password');
             $table->enum('position', ['leader', 'sekertariat', 'treasurer', 'member']);
             $table->foreignId('division_id')->nullable();
+            $table->timestamp('time_login')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

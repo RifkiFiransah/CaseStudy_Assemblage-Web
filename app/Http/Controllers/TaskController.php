@@ -16,7 +16,7 @@ class TaskController extends Controller
     {
         $divisions = Division::select('name', 'id')->get();
         $users = User::select('name', 'id')->where('position', 'leader')->orWhere('position', 'member')->get();
-        $tasks = Task::orderBy('tanggal', 'desc')->get();
+        $tasks = Task::with(['users'])->latest()->get();
         return view('prokers.index', [
             'title' => 'Program kerja',
             'tasks' => $tasks,

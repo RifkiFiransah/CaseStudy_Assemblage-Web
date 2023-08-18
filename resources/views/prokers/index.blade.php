@@ -164,10 +164,4 @@ let count = {{ count($tasks) }};
   }
 
 </script>
-
-@if (session()->has('success'))
-<script>
-  swal('Berhasil', `{{ session('success') }}`, 'success');
-</script>
-@endif
 @endpush

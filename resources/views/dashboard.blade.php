@@ -16,7 +16,7 @@
             <h4>Pengurus</h4>
           </div>
           <div class="card-body">
-            {{ $users->count() }}
+            {{ $userCount }}
           </div>
         </div>
       </div>
@@ -85,28 +85,30 @@
         </div>
         <div class="card-body">
           <ul class="list-unstyled list-unstyled-border">
-            <li class="media">
-              <img class="mr-3 rounded-circle" width="50" src="../assets/img/avatar/avatar-1.png" alt="avatar">
-              <div class="media-body">
-                <div class="float-right text-primary">Now</div>
-                <div class="media-title">Farhan A Mujib</div>
-                <span class="text-small text-muted">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</span>
-              </div>
-            </li>
-            <li class="media">
-              <img class="mr-3 rounded-circle" width="50" src="../assets/img/avatar/avatar-2.png" alt="avatar">
-              <div class="media-body">
-                <div class="float-right">12m</div>
-                <div class="media-title">Ujang Maman</div>
-                <span class="text-small text-muted">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</span>
-              </div>
-            </li>
+            @forelse ($users as $user)
+              <li class="media">
+                <img class="mr-3 rounded-circle" width="50" src="../assets/img/avatar/{{ $user->profile }}" alt="avatar">
+                <div class="media-body">
+                  <div class="float-right text-primary" id="time-{{ $user->id }}"></div>
+                  <div class="media-title">{{ $user->name }}</div>
+                  <span class="text-small text-muted">Cras sit amet nibh libero, in gravida nulla.</span>
+                </div>
+              </li>
+            @empty
+              <li class="media">
+                <img class="mr-3 rounded-circle" width="50" src="../assets/img/avatar/avatar-1.png" alt="avatar">
+                <div class="media-body">
+                  <div class="media-title">No Data</div>
+                </div>
+              </li>
+            @endforelse
+            
           </ul>
-          <div class="text-center pt-1 pb-1">
+          {{-- <div class="text-center pt-1 pb-1">
             <a href="#" class="btn btn-primary btn-lg btn-round">
               View All
             </a>
-          </div>
+          </div> --}}
         </div>
       </div>
     </div>
@@ -283,5 +285,12 @@
       },
     }
   });
+
+  // user timeline
+  @foreach($users as $user)
+  let time_login{{ $loop->iteration }} = document.querySelector('#time-{{ $user->id }}')
+  let date_{{ $loop->iteration }} = moment("{{ $user->time_login }}").startOf('minute')
+  time_login{{ $loop->iteration }}.textContent = date_{{ $loop->iteration }}.fromNow()
+  @endforeach
 </script>
 @endpush

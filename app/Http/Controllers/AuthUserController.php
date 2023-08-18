@@ -25,6 +25,9 @@ class AuthUserController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
+            $id = auth()->user()->id;
+            $time_login = now();
+            User::where('id', $id)->update(['time_login' => $time_login]);
             return redirect()->intended('home');
         }
         return back()->with('error', 'Maaf username atau password salah');
@@ -39,7 +42,6 @@ class AuthUserController extends Controller
 
     public function store(Request $request)
     {
-        // ddd($request);
         $validatedData = $request->validate([
             'name' => 'required|unique:users|max:100',
             'email' => 'required|email',
@@ -47,7 +49,11 @@ class AuthUserController extends Controller
             'password' => 'required|min:5',
         ]);
         $validatedData['password'] = bcrypt($request->input('password'));
-        User::create($validatedData);
+        if ($validatedData['position'] == 'leader') {
+            User::create($validatedData)->assignRole('leader');
+            return redirect('/login')->with('success', 'Registrasi berhasil!!, Silahkan Login');
+        }
+        User::create($validatedData)->assignRole('member');
         return redirect('/login')->with('success', 'Registrasi berhasil!!, Silahkan Login');
     }
 

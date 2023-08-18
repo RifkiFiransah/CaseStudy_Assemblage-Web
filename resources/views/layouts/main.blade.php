@@ -20,6 +20,8 @@
   <link rel="stylesheet" href="{{ asset('./assets/modules/datatables.net-select-bs4/css/select.bootstrap4.min.css')}}">
   <link rel="stylesheet" href="{{ asset('./assets/modules/fullcalendar/dist/fullcalendar.min.css') }}">
   <link rel="stylesheet" href="{{ asset('./assets/modules/bootstrap-social/bootstrap-social.css') }}">
+  <link rel="stylesheet" href="{{ asset('./assets/modules/izitoast/dist/css/iziToast.min.css') }}">
+
 
 
   <!-- Template CSS -->
@@ -90,6 +92,8 @@
   <script src="{{ asset('./assets/modules/datatables.net-select-bs4/js/select.bootstrap4.min.js') }}"></script>
   <script src="{{ asset('./assets/modules/fullcalendar/dist/fullcalendar.min.js') }}"></script>
   <script src="{{ asset('./assets/modules/chart.js/dist/Chart.min.js') }}"></script>
+  <script src="{{ asset('./assets/modules/izitoast/dist/js/iziToast.min.js') }}"></script>
+
 
   <!-- Template JS File -->
   <script src="{{ asset('./assets/js/scripts.js') }}"></script>
@@ -105,9 +109,8 @@
     {{-- @include('layouts.script') --}}
 
   @stack('script')
-  @if (session()->has('success'))
+  {{-- @if (session()->has('success'))
   <script>
-    // swal('Berhasil', `{{ session('success') }}`, 'success');
     const Toast = Swal.mixin({
       toast: true,
       position: 'top-right',
@@ -122,6 +125,22 @@
     Toast.fire({
       icon: 'success',
       title: '{{ session('success') }}'
+    })
+  </script>
+  @endif --}}
+  @if (session()->has('success'))
+  <script>
+    swal({
+      title: 'Berhasil',
+      text: `{{ session('success') }}`,
+      icon: 'success',
+      dangerMode: true
+    }).then((oke) => {
+      iziToast.success({
+        title: 'Success!',
+        message: '{{ session('success') }}',
+        position: 'topRight'
+      });
     })
   </script>
   @endif

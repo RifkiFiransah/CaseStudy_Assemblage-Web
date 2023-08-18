@@ -42,9 +42,13 @@ class SectionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Section $section)
+    public function show(Section $section, $id)
     {
-        //
+        $seksi = $section::findOrFail($id)->first();
+        return view('sections.show', [
+            'title' => 'Detail Seksi',
+            'seksi' => $seksi
+        ]);
     }
 
     /**

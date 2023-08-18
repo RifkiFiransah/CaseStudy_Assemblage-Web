@@ -114,9 +114,4 @@ let count = {{ count($sections) }};
     });
   }
 </script>
-@if (session()->has('success'))
-<script>
-  swal('Berhasil', `{{ session('success') }}`, 'success');
-</script>
-@endif
 @endpush

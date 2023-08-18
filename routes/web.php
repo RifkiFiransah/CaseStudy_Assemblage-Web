@@ -44,6 +44,7 @@ Route::middleware(['auth', 'permission:read'])->group(function () {
     Route::get('/aktivitas', [ActivitiesController::class, 'index'])->name('aktivitas');
     Route::get('/calendar', [ActivitiesController::class, 'calendar'])->name('calendar');
     Route::get('/profil', [ProfilController::class, 'index'])->name('profil.index');
+    Route::put('/profil', [ProfilController::class, 'update'])->name('profil.update');
     Route::post('/logout', [AuthUserController::class, 'logout'])->name('logout');
 
     Route::resource('/pengurus', PengurusController::class)->except(['create']);

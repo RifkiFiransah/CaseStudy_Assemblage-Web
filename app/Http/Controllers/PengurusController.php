@@ -40,11 +40,18 @@ class PengurusController extends Controller
             'position' => 'required|min:5',
         ]);
         $validatedData['password'] = bcrypt($request->input('position') . "123");
-        $validatedData['created_at'] = now();
-        $validatedData['updated_at'] = now();
         // ddd($validatedData);
-        User::insert($validatedData);
-        return back()->with('success', 'Berhasil menambahkan pengurus baru');
+        if ($validatedData['position'] == 'leader') {
+            User::create($validatedData)->assignRole('leader');
+            return back()->with('success', 'Berhasil menambahkan pengurus baru');
+        } else {
+            $validatedData['created_at'] = now();
+            $validatedData['updated_at'] = now();
+            User::insert($validatedData);
+            $id = User::latest()->first();
+            $id->assignRole('member');
+            return back()->with('success', 'Berhasil menambahkan pengurus baru');
+        }
     }
 
     /**
@@ -52,6 +59,11 @@ class PengurusController extends Controller
      */
     public function show(string $id)
     {
+        $user = User::with('divisions')->findOrFail($id);
+        return view('users.show', [
+            "title" => "Detail Pengurus",
+            'user' => $user
+        ]);
     }
 
     /**

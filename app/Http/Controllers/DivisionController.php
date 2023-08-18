@@ -54,9 +54,13 @@ class DivisionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Division $division)
+    public function show(Division $division, $id)
     {
-        //
+        $divisi = $division::findOrFail($id)->first();
+        return view('divisions.show', [
+            'title' => 'Detail Divisi',
+            'divisi' => $divisi
+        ]);
     }
 
     /**

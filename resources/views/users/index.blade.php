@@ -129,20 +129,10 @@
         }).then((willDelete) => {
           if (willDelete) {
           form.submit();
-          // swal('Poof! Your imaginary file has been deleted!', {
-          //   icon: 'success',
-          // });
-          // } else {
-          // swal('Your imaginary file is safe!');
+          
           }
         });
     });
   }
 </script>
-
-@if (session()->has('success'))
-<script>
-  swal('Berhasil', `{{ session('success') }}`, 'success');
-</script>
-@endif
 @endpush

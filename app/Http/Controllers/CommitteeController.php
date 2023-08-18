@@ -55,9 +55,13 @@ class CommitteeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Committee $committee)
+    public function show(Committee $committee, $id)
     {
-        //
+        $kepanitiaan = $committee->load(['users', 'sections', 'tasks'])->findOrFail($id)->first();
+        return view('committees.show', [
+            'title' => 'Detail kepanitiaan',
+            'kepanitiaan' => $kepanitiaan
+        ]);
     }
 
     /**

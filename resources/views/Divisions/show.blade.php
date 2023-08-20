@@ -22,12 +22,25 @@
                 @endif
               </div>
               <div class="col-12 col-md-12 col-lg-8">
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <h3 class="card-text">{{ $divisi->description }}</h3>
+                <p class="card-text">Kepala Divisi : {{ !$divisi->leader ? '-' : $divisi->leader }}</p>
+                <p class="mb-0">Anggota : </p>
+                <ul class="">
+                  @foreach ($divisi->users as $user)
+                  <li class="bold text-primary">{{ $user->name }}</li>
+                  @endforeach
+                </ul>
+                <p class="mb-0">Program Kerja : </p>
+                <ul class="mb-5">
+                  @foreach ($divisi->tasks as $task)
+                  <li class="bold text-primary">{{ $task->name }}</li>
+                  @endforeach
+                </ul>
                 @can('update')
-                <a href="{{ route('pengurus.edit', $divisi->id) }}" class="btn btn-info"><i class="fas fa-pen"></i> Edit</a> | 
+                <a href="{{ route('divisi.edit', $divisi->id) }}" class="btn btn-info"><i class="fas fa-pen"></i> Edit</a> | 
                   @endcan
                   @can('delete')
-                  <form action="{{ route('pengurus.destroy', $divisi->id) }}" method="post" class="d-inline">
+                  <form action="{{ route('divisi.destroy', $divisi->id) }}" method="post" class="d-inline">
                     @csrf
                     @method('delete')
                     <button type="submit" class="btn btn-danger" id="delete"><i class="fas fa-trash"></i> Delete</button>
@@ -37,7 +50,7 @@
             </div>
           </div>
           <div class="card-footer bg-whitesmoke">
-            <a href="{{ route('pengurus.index') }}" class="btn btn-secondary">Back</a>
+            <a href="{{ route('divisi.index') }}" class="btn btn-secondary">Back</a>
           </div>
         </div>
       </div>

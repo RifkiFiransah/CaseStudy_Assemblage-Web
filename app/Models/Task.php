@@ -21,4 +21,9 @@ class Task extends Model
     {
         return $this->belongsTo(Division::class, 'division_id');
     }
+
+    public function committees(): BelongsTo
+    {
+        return $this->belongsTo(Committee::class);
+    }
 }

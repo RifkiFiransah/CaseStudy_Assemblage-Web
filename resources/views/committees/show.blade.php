@@ -10,27 +10,27 @@
       <div class="col-12 col-md-10 col-lg-10">
         <div class="card card-primary">
           <div class="card-header">
-            <h4 class="card-title">{{ $kepanitiaan->tasks->name }}</h4>
+            <h4 class="card-title">kepanitiaan - {{ $kepanitiaan->tasks->name }}</h4>
           </div>
           <div class="card-body">
             <div class="row">
               <div class="col-12 col-md-12 col-lg-12">
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                @can('update')
-                <a href="{{ route('pengurus.edit', $kepanitiaan->id) }}" class="btn btn-info"><i class="fas fa-pen"></i> Edit</a> | 
-                  @endcan
-                  @can('delete')
-                  <form action="{{ route('pengurus.destroy', $kepanitiaan->id) }}" method="post" class="d-inline">
-                    @csrf
-                    @method('delete')
-                    <button type="submit" class="btn btn-danger" id="delete"><i class="fas fa-trash"></i> Delete</button>
-                  </form>
-                @endcan
+                <p class="card-text">Pengurus yang terlibat: </p>
               </div>
             </div>
           </div>
           <div class="card-footer bg-whitesmoke">
             <a href="{{ route('pengurus.index') }}" class="btn btn-secondary">Back</a>
+            @can('update')
+            <a href="{{ route('pengurus.edit', $kepanitiaan->id) }}" class="btn btn-info"><i class="fas fa-pen"></i> Edit</a> | 
+              @endcan
+              @can('delete')
+              <form action="{{ route('pengurus.destroy', $kepanitiaan->id) }}" method="post" class="d-inline">
+                @csrf
+                @method('delete')
+                <button type="submit" class="btn btn-danger" id="delete"><i class="fas fa-trash"></i> Delete</button>
+              </form>
+            @endcan
           </div>
         </div>
       </div>

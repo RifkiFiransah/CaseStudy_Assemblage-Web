@@ -51,7 +51,7 @@
                   <td>{{ $proker->tanggal }}</td>
                   <td colspan="2">
                     @can('show')
-                    <a href="{{ route('proker.show', $proker->id) }}" class="btn btn-success"><i class="fas fa-users"></i> Kepanitian</a> | 
+                    <a href="{{ route('proker.show', $proker->id) }}" class="btn btn-success"><i class="fas fa-eye"></i> Detail</a> | 
                     @endcan
                     @can('update')
                     <a href="{{ route('proker.edit', $proker->id) }}" class="btn btn-info"><i class="fas fa-pen"></i> Edit</a> | 

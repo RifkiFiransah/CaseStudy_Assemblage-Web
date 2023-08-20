@@ -53,8 +53,13 @@ class TaskController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Task $task)
+    public function show(Task $task, $id)
     {
+        $proker = $task->load(['users', 'divisions'])->findOrFail($id);
+        return view('prokers.show', [
+            'title' => 'Detail Proker',
+            'proker' => $proker
+        ]);
     }
 
     /**

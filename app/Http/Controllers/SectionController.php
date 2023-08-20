@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Committee;
 use App\Models\Section;
 use Illuminate\Http\Request;
 
@@ -44,10 +45,12 @@ class SectionController extends Controller
      */
     public function show(Section $section, $id)
     {
-        $seksi = $section::findOrFail($id)->first();
+        $seksi = $section->load(['committees'])->findOrFail($id);
+        $committees = Committee::with(['tasks', 'users', 'sections'])->findOrFail($id)->get();
         return view('sections.show', [
             'title' => 'Detail Seksi',
-            'seksi' => $seksi
+            'seksi' => $seksi,
+            'committees' => $committees
         ]);
     }
 

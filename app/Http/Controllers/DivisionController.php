@@ -56,7 +56,7 @@ class DivisionController extends Controller
      */
     public function show(Division $division, $id)
     {
-        $divisi = $division::findOrFail($id)->first();
+        $divisi = $division->load(['tasks', 'users'])->findOrFail($id);
         return view('divisions.show', [
             'title' => 'Detail Divisi',
             'divisi' => $divisi

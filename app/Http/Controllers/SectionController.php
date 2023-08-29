@@ -84,6 +84,11 @@ class SectionController extends Controller
      */
     public function destroy(Section $section, $id)
     {
+        $committee = Committee::where('section_id', $id);
+        if ($committee->count()) {
+            $committee->delete();
+        }
+
         $section::findOrFail($id)->delete();
 
         return back()->with('success', 'Data seksi berhasil dihapus');

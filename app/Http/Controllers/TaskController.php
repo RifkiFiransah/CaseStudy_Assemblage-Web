@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Committee;
 use App\Models\Division;
 use App\Models\Task;
 use App\Models\User;
@@ -102,6 +103,11 @@ class TaskController extends Controller
      */
     public function destroy(Task $task, $id)
     {
+        $committee = Committee::where('task_id', $id);
+        if ($committee->count()) {
+            $committee->delete();
+        }
+
         $task::findOrFail($id)->delete();
 
         return back()->with('success', 'Data proker berhasil dihapus');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Division;
+use App\Models\Task;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -99,6 +100,18 @@ class DivisionController extends Controller
      */
     public function destroy($id)
     {
+        // menghapus data proker mengenai divisi yang terkait
+        $task = Task::where('division_id', $id);
+        if ($task->count()) {
+            $task->delete();
+        }
+
+        // Mengubah data user menjadi null terkait divisinya
+        $user = User::where('division_id', $id);
+        if ($user->count()) {
+            $user->update(["division_id" => null]);
+        }
+
         Division::where('id', $id)->delete();
 
         return redirect('/divisi')->with('success', 'Data Divisi berhasil dihapus');

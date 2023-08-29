@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
   <title>{{ $title }} &mdash; Hima TI</title>
+  <link rel="shortcut icon" href="{{ asset('./img/hima/logo.png') }}" type="image/x-icon">
 
   <!-- General CSS Files -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -77,7 +78,7 @@
               </div>
             </div>
             <div class="text-muted text-center">
-              Don't have an account? <a href="{{ route('registrasi') }}">Create One</a>
+              Don't have an account? <a href="{{ route('registrasi') }}">Register</a>
             </div>
             <div class="simple-footer">
               Copyright &copy; {{ date('Y') }} <div class="bullet"></div> Build By <a href="https://nauv.al/">HIMA TI UNIKU JAYA</a>

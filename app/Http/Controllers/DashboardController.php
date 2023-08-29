@@ -13,14 +13,14 @@ class DashboardController extends Controller
     public function index()
     {
         $users = User::orderBy('time_login', 'desc')->limit(3)->get();
-        $userCount = User::count();
+        $userCount = User::all();
         $divisions = Division::all();
         $tasks = Task::all();
         $committees = Committee::all();
 
         return view('dashboard', [
             'title' => 'Dashboard',
-            'userCount' => $userCount,
+            'userCount' => $userCount->count(),
             'users' => $users,
             'divisions' => $divisions,
             'tasks' => $tasks,

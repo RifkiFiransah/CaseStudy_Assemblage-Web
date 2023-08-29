@@ -117,40 +117,10 @@
     <div class="col-lg-5 col-md-6 col-12">
       <div class="card">
         <div class="card-header">
-          <h4>Referral URL</h4>
+          <h4>Maps</h4>
         </div>
         <div class="card-body">
-          <div class="mb-4">
-            <div class="text-small float-right font-weight-bold text-muted">2,100</div>
-            <div class="font-weight-bold mb-1">Google</div>
-            <div class="progress" data-height="3">
-              <div class="progress-bar" role="progressbar" data-width="80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-          </div>
-  
-          <div class="mb-4">
-            <div class="text-small float-right font-weight-bold text-muted">1,880</div>
-            <div class="font-weight-bold mb-1">Facebook</div>
-            <div class="progress" data-height="3">
-              <div class="progress-bar" role="progressbar" data-width="67%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-          </div>
-  
-          <div class="mb-4">
-            <div class="text-small float-right font-weight-bold text-muted">473</div>
-            <div class="font-weight-bold mb-1">Kodinger</div>
-            <div class="progress" data-height="3">
-              <div class="progress-bar" role="progressbar" data-width="28%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-          </div>
-  
-          <div class="mb-4">
-            <div class="text-small float-right font-weight-bold text-muted">418</div>
-            <div class="font-weight-bold mb-1">Multinity</div>
-            <div class="progress" data-height="3">
-              <div class="progress-bar" role="progressbar" data-width="20%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-          </div>
+          <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15841.131867345637!2d108.4774657!3d-6.975903!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6f17c170190f9f%3A0xd4f523777c03f4cd!2sHIMA%20TI%20FKOM%20UNIKU!5e0!3m2!1sid!2sid!4v1693288792711!5m2!1sid!2sid" width="360" height="260" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
       </div>
     </div>

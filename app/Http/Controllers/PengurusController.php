@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Committee;
 use App\Models\Division;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -109,6 +110,12 @@ class PengurusController extends Controller
      */
     public function destroy(string $id)
     {
+        $committee = Committee::where('user_id', $id)->get();
+
+        if ($committee) {
+            Committee::where('user_id', $id)->delete();
+        }
+
         User::findOrFail($id)->delete();
 
         return redirect('/pengurus')->with('success', 'Data Pengurus berhasil dihapus');

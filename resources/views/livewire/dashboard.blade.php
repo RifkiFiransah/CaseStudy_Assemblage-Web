@@ -278,8 +278,9 @@
 
             // user timeline
             @foreach ($users as $user)
-                let date_{{ $user->id }} = moment("{{ $user->time_login }}").startOf('minute');
-                document.getElementById('time{{ $user->id }}').textContent = date_{{ $user->id }}.fromNow();
+                // let date_{{ $loop->iteration }} = moment("{{ $user->time_login }}").startOf('minute');
+                document.getElementById('time{{ $user->id }}').textContent = moment("{{ $user->time_login }}").startOf(
+                    'minute').fromNow();
             @endforeach
         </script>
     @endpush

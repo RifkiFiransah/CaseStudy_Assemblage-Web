@@ -8,6 +8,8 @@
     <title>{{ $title ?? 'Page Title' }}</title>
 
     @include('components.layouts.header')
+
+    @vite(['resources/js/app.js', 'resources/css/app.css'])
 </head>
 
 <body>
@@ -47,6 +49,22 @@
                 iziToast.success({
                     title: 'Success!',
                     message: '{{ session('success') }}',
+                    position: 'topRight'
+                });
+            })
+        </script>
+    @endif
+    @if (flash()->message)
+        <script>
+            swal({
+                title: 'Berhasil',
+                text: `{{ flash()->message }}`,
+                icon: 'success',
+                dangerMode: true
+            }).then((oke) => {
+                iziToast.success({
+                    title: 'Success!',
+                    message: '{{ flash()->message }}',
                     position: 'topRight'
                 });
             })

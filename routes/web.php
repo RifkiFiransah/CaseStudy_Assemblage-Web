@@ -23,12 +23,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/home', App\Livewire\Home::class)->name('home');
-Route::get('/', function () {
-    return redirect()->route('dashboard');
+Route::middleware(['auth', 'permission:read'])->group(function () {
+    Route::get('/home', App\Livewire\Home::class)->name('home');
+    Route::get('/', function () {
+        return redirect()->route('dashboard');
+    });
+    Route::get('/dashboard', App\Livewire\Dashboard::class)->name('dashboard');
+    Route::get('/pengurus', App\Livewire\Pengurus\Index::class)->name('pengurus.index');
+    Route::get('/pengurus/{user}', App\Livewire\Pengurus\Show::class)->name('pengurus.show');
+    Route::get('/pengurus/{user}/edit', App\Livewire\Pengurus\Edit::class)->name('pengurus.edit');
 });
-Route::get('/dashboard', App\Livewire\Dashboard::class)->name('dashboard');
-
 
 
 
@@ -57,7 +61,7 @@ Route::middleware(['auth', 'permission:read'])->group(function () {
     Route::put('/profil', [ProfilController::class, 'update'])->name('profil.update');
     Route::post('/logout', [AuthUserController::class, 'logout'])->name('logout');
 
-    Route::resource('/pengurus', PengurusController::class)->except(['create']);
+    // Route::resource('/pengurus', PengurusController::class)->except(['create']);
     Route::resource('/divisi', DivisionController::class)->except(['create']);
     Route::resource('/proker', TaskController::class)->except(['create']);
     Route::resource('/seksi-seksi', SectionController::class)->except(['create']);

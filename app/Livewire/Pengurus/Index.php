@@ -56,7 +56,6 @@ class Index extends Component
     public function delete($id)
     {
         $user = User::findOrFail($id);
-        ddd($user);
         $user->delete();
         // flash('Berhasil menghapus pengurus baru');
         // $this->dispatch('index', $user->id);

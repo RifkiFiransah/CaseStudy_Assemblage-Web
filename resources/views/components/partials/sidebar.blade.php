@@ -1,6 +1,7 @@
 <div class="main-sidebar sidebar-style-2">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
+            <img src="{{ asset('/img/hima/logo.png') }}" class="img-fluid shadow-light" width="50">
             <a href="index.html">HIMA-TI</a>
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
@@ -25,7 +26,7 @@
             <x-nav-link :active="Request()->is('proker*')" href="{{ route('proker.index') }}" :icon="'fas fa-book-open'">
                 Proker
             </x-nav-link>
-            <x-nav-link :active="Request()->is('seksi-seksi*')" href="{{ route('seksi-seksi.index') }}" :icon="'fas fa-list'">
+            <x-nav-link :active="Request()->is('seksi-seksi*')" href="{{ route('section.index') }}" :icon="'fas fa-list'">
                 Seksi-seksi
             </x-nav-link>
             <x-nav-link :active="Request()->is('kepanitiaan*')" href="{{ route('kepanitiaan.index') }}" :icon="'fas fa-book-reader'">

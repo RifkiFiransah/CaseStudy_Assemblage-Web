@@ -29,9 +29,22 @@ Route::middleware(['auth', 'permission:read'])->group(function () {
         return redirect()->route('dashboard');
     });
     Route::get('/dashboard', App\Livewire\Dashboard::class)->name('dashboard');
+
     Route::get('/pengurus', App\Livewire\Pengurus\Index::class)->name('pengurus.index');
     Route::get('/pengurus/{user}', App\Livewire\Pengurus\Show::class)->name('pengurus.show');
     Route::get('/pengurus/{user}/edit', App\Livewire\Pengurus\Edit::class)->name('pengurus.edit');
+
+    Route::get('/divisi', App\Livewire\Divisi\Index::class)->name('divisi.index');
+    Route::get('/divisi/{divisi}', App\Livewire\Divisi\show::class)->name('divisi.show');
+    Route::get('/divisi/{divisi}/edit', App\Livewire\Divisi\edit::class)->name('divisi.edit');
+
+    Route::get('/proker', App\Livewire\Proker\Index::class)->name('proker.index');
+    Route::get('/proker/{proker}', App\Livewire\Proker\show::class)->name('proker.show');
+    Route::get('/proker/{proker}/edit', App\Livewire\Proker\edit::class)->name('proker.edit');
+
+    Route::get('/seksi-seksi', App\Livewire\Section\Index::class)->name('section.index');
+    Route::get('/seksi-seksi/{section}', App\Livewire\Section\show::class)->name('section.show');
+    Route::get('/seksi-seksi/{section}/edit', App\Livewire\Section\edit::class)->name('section.edit');
 });
 
 
@@ -62,8 +75,8 @@ Route::middleware(['auth', 'permission:read'])->group(function () {
     Route::post('/logout', [AuthUserController::class, 'logout'])->name('logout');
 
     // Route::resource('/pengurus', PengurusController::class)->except(['create']);
-    Route::resource('/divisi', DivisionController::class)->except(['create']);
-    Route::resource('/proker', TaskController::class)->except(['create']);
-    Route::resource('/seksi-seksi', SectionController::class)->except(['create']);
+    // Route::resource('/divisi', DivisionController::class)->except(['create']);
+    // Route::resource('/proker', TaskController::class)->except(['create']);
+    // Route::resource('/seksi-seksi', SectionController::class)->except(['create']);
     Route::resource('/kepanitiaan', CommitteeController::class)->except(['create']);
 });

@@ -1,8 +1,8 @@
 <div>
-    {{-- Be like water. --}}
+    {{-- Do your work, then step back. --}}
     <section class="section">
         <div class="section-header">
-            <h1>Pengurus</h1>
+            <h1>Divisi</h1>
         </div>
 
         <div class="section-body">
@@ -11,96 +11,85 @@
                     <h4>Hima TI</h4>
                     <div class="card-header-action">
                         <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                            <i class="fas fa-plus-circle"></i> Tambah Pengurus
+                            <i class="fas fa-plus-circle"></i> Tambah Divisi
                         </button>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-striped" id="table-1">
+                        <table class="table">
                             <thead class="thead-dark">
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Divisi</th>
-                                    <th scope="col">Jabatan</th>
+                                    <th scope="col">Name Divisi</th>
+                                    <th scope="col" style="width: 220px">Deskripsi</th>
+                                    <th scope="col" style="width: 220px">Kepala Divisi</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($users as $user)
-                                    @props(['id' => $user->id])
-                                    <tr wire:key="{{ $user->id }}">
-                                        <th scope="row">{{ $loop->iteration }}</th>
-                                        <td>{{ $user->name }}</td>
+                                @foreach ($divisions as $divisi)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $divisi->name }}</td>
+                                        <td>{!! $divisi->description !!}</td>
                                         <td>
-                                            {{-- {{ $user->division_id ? $user->divisions->name : 'Edit data untuk menambahkan divisi' }} --}}
-                                            {{ $user->divisions->name ?? 'Edit data untuk menambahkan divisi' }}
+                                            {{ $divisi->leader ? $divisi->leader : 'Edit untuk menambahkan kepala divisi' }}
                                         </td>
-                                        <td>{{ $user->position }}</td>
                                         <td colspan="3">
                                             @can('show')
-                                                <a wire:navigate href="{{ route('pengurus.show', $user->id) }}"
-                                                    class="btn btn-success"><i class="fas fa-eye"></i> Detail</a> |
+                                                <a href="{{ route('divisi.show', $divisi->id) }}" class="btn btn-success"><i
+                                                        class="fas fa-eye"></i> Detail</a> |
                                             @endcan
                                             @can('update')
-                                                <a wire:navigate href="{{ route('pengurus.edit', $user->id) }}"
-                                                    class="btn btn-info"><i class="fas fa-pen"></i> Edit</a> |
+                                                <a href="{{ route('divisi.edit', $divisi->id) }}" class="btn btn-info"><i
+                                                        class="fas fa-pen"></i> Edit</a> |
                                             @endcan
                                             @can('delete')
-                                                {{-- <form wire:submit='destroy({{ $user->id }})' class="d-inline">
-                                                    <input type="text" wire:model='id' value="{{ $id }}">
-                                                    <button type="submit" class="btn btn-danger"
-                                                        id="delete-{{ $loop->iteration }}"><i class="fas fa-trash"></i>
-                                                        Delete</button>
-                                                </form> --}}
-                                                <button class="btn btn-danger" wire:click='destroy({{ $user->id }})'
+                                                <button class="btn btn-danger" wire:click='destroy({{ $divisi->id }})'
                                                     id="delete-{{ $loop->iteration }}"><i class="fas fa-trash"></i>
                                                     Delete</button>
                                             @endcan
                                         </td>
                                     </tr>
-                                @empty
-                                    <tr>
-                                        <td>Saat ini data belum tersedia</td>
-                                    </tr>
-                                @endforelse
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
+        </div>
     </section>
+
     <div class="modal fade" tabindex="-1" role="dialog" id="exampleModal">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Form Tambah Pengurus</h5>
-                    {{-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button> --}}
+                    <h5 class="modal-title">Form Tambah Divisi</h5>
                 </div>
                 <div class="modal-body">
                     <form wire:submit='store'>
                         <div class="form-group">
-                            <label>Your Name</label>
-                            <input type="text" class="form-control" wire:model="form.name"
-                                value="{{ old('name') ?? '' }}" required>
+                            <label>Nama Divisi</label>
+                            <input type="text" class="form-control" wire:model="name" required>
                         </div>
                         <div class="form-group">
-                            <label>Email</label>
-                            <input type="email" class="form-control" wire:model="form.email" required
-                                value="{{ old('email') ?? '' }}">
-                        </div>
-                        <div class="form-group">
-                            <label>Jabatan</label>
-                            <select class="form-control selectric" wire:model="form.position">
-                                <option disabled selected>Pilih Jabatan</option>
-                                <option value="sekertariat">Sekertaris</option>
-                                <option value="treasurer">Bendahara</option>
-                                <option value="member">Member</option>
-                                <option value="leader">Leader</option>
+                            <label>kepala Divisi</label>
+                            <select class="form-control selectric" wire:model="leader">
+                                <option disabled selected>Pilih Kepala Divisi</option>
+                                @forelse ($users as $user)
+                                    <option value="{{ $user->name }}">{{ $user->name }}</option>
+                                @empty
+                                    <option disabled>Kepala Divisi Belum Tersedia</option>
+                                @endforelse
                             </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Description : {{ $description }}</label>
+                            <div>
+                                <textarea class="form-control" wire:model="description" rows="3"></textarea>
+                                {{-- <textarea class="form-control summernote-simple" wire:model="description">{{ $description }}</textarea> --}}
+                            </div>
                         </div>
                         <button class="btn btn-primary">Submit</button>
                     </form>
@@ -111,6 +100,20 @@
 
     @push('script')
         <script type="text/javascript">
+            $('#summernote').summernote({
+                tabsize: 2,
+                height: 130,
+                toolbar: [
+                    ['font', ['bold', 'underline', 'clear']],
+                    ['para', ['ul', 'ol', 'paragraph']]
+                ],
+                callbacks: {
+                    onChange: function(contents, $editable) {
+                        // console.log(contents);
+                        @this.set('description', contents);
+                    }
+                }
+            });
             window.addEventListener('swal:success', event => {
                 event.preventDefault
                 swal({
@@ -137,12 +140,12 @@
                 }).then((willDelete) => {
                     if (willDelete) {
                         // $('this').trigger('click', {});
-                        Livewire.dispatch('delete', {
+                        Livewire.dispatch('deleteDivisi', {
                             id: event.detail[0].id
                         })
                     } else {
                         // location.reload();
-                        Livewire.dispatch('index', {
+                        Livewire.dispatch('indexDivisi', {
                             id: event.detail[0].id
                         })
                     }

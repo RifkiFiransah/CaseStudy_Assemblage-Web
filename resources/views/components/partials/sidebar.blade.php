@@ -17,22 +17,27 @@
             </x-nav-link>
 
             <li class="menu-header">Master</li>
-            <x-nav-link :active="Request()->is('pengurus*')" href="{{ route('pengurus.index') }}" :icon="'fas fa-users'">
+            <x-nav-link :active="Request()->is('pengurus*')" href="{{ route('pengurus.index') }}"
+                :icon="'fas fa-users'">
                 Pengurus
             </x-nav-link>
             <x-nav-link :active="Request()->is('divisi*')" href="{{ route('divisi.index') }}" :icon="'fas fa-school'">
                 Divisi
             </x-nav-link>
-            <x-nav-link :active="Request()->is('proker*')" href="{{ route('proker.index') }}" :icon="'fas fa-book-open'">
+            <x-nav-link :active="Request()->is('proker*')" href="{{ route('proker.index') }}"
+                :icon="'fas fa-book-open'">
                 Proker
             </x-nav-link>
-            <x-nav-link :active="Request()->is('seksi-seksi*')" href="{{ route('section.index') }}" :icon="'fas fa-list'">
+            <x-nav-link :active="Request()->is('seksi-seksi*')" href="{{ route('section.index') }}"
+                :icon="'fas fa-list'">
                 Seksi-seksi
             </x-nav-link>
-            <x-nav-link :active="Request()->is('kepanitiaan*')" href="{{ route('kepanitiaan.index') }}" :icon="'fas fa-book-reader'">
+            <x-nav-link :active="Request()->is('kepanitiaan*')" href="{{ route('kepanitiaan.index') }}"
+                :icon="'fas fa-book-reader'">
                 Kepanitiaan
             </x-nav-link>
-            <x-nav-link :active="Request()->is('aktivitas*')" href="{{ route('aktivitas') }}" :icon="'fas fa-pencil-ruler'">
+            <x-nav-link :active="Request()->is('aktivitas*')" href="{{ route('aktivitas') }}"
+                :icon="'fas fa-pencil-ruler'">
                 aktivitas
             </x-nav-link>
 
@@ -42,12 +47,7 @@
             </x-nav-link>
 
             <li class="nav-item dropdown">
-                <form action="{{ route('logout') }}" method="post" class="d-inline">
-                    @csrf
-                    <button type="submit" class="dropdown-item text-danger border-0">
-                        <i class="fas fa-sign-out-alt ml-1 mr-3"></i> Logout
-                    </button>
-                </form>
+                <livewire:logout>
             </li>
         </ul>
 

@@ -31,8 +31,8 @@ Route::middleware(['auth', 'permission:read'])->group(function () {
     Route::get('/dashboard', App\Livewire\Dashboard::class)->name('dashboard');
 
     Route::get('/pengurus', App\Livewire\Pengurus\Index::class)->name('pengurus.index');
-    Route::get('/pengurus/{user}', App\Livewire\Pengurus\Show::class)->name('pengurus.show');
-    Route::get('/pengurus/{user}/edit', App\Livewire\Pengurus\Edit::class)->name('pengurus.edit');
+    Route::get('/pengurus/{pengurus}', App\Livewire\Pengurus\Show::class)->name('pengurus.show');
+    Route::get('/pengurus/{pengurus}/edit', App\Livewire\Pengurus\Edit::class)->name('pengurus.edit');
 
     Route::get('/divisi', App\Livewire\Divisi\Index::class)->name('divisi.index');
     Route::get('/divisi/{divisi}', App\Livewire\Divisi\Show::class)->name('divisi.show');
@@ -49,6 +49,13 @@ Route::middleware(['auth', 'permission:read'])->group(function () {
     Route::get('/kepanitiaan', App\Livewire\Kepanitiaan\Index::class)->name('kepanitiaan.index');
     Route::get('/kepanitiaan/{panitia}', App\Livewire\Kepanitiaan\Show::class)->name('kepanitiaan.show');
     Route::get('/kepanitiaan/{panitia}/edit', App\Livewire\Kepanitiaan\Edit::class)->name('kepanitiaan.edit');
+
+    Route::get('/aktivitas', App\Livewire\Aktivitas\Index::class)->name('aktivitas');
+    Route::get('/calendar', App\Livewire\Aktivitas\Calender::class)->name('calendar');
+
+    Route::get('/profil', App\Livewire\Profil\Index::class)->name('profil.index');
+    // Route::get('/logout', App\Livewire\Profil\Index::class)->name('logout.index');
+    // Route::post('/logout', [App\Livewire\Profil\Index::class, 'logout'])->name('logout');
 });
 
 
@@ -61,10 +68,12 @@ Route::middleware(['auth', 'permission:read'])->group(function () {
 // })->name('home');
 
 Route::middleware('guest')->group(function () {
-    Route::get('/login', [AuthUserController::class, 'login'])->name('login');
-    Route::post('/login', [AuthUserController::class, 'auth'])->name('auth');
-    Route::get('/registrasi', [AuthUserController::class, 'registrasi'])->name('registrasi');
-    Route::post('/registrasi', [AuthUserController::class, 'store'])->name('registrasi.store');
+    Route::get('/login', App\Livewire\Login::class)->name('login');
+    Route::get('/registrasi', App\Livewire\Registrasi::class)->name('registrasi');
+    // Route::post('/login', [AuthUserController::class, 'auth'])->name('auth');
+    // Route::post('/registrasi', [AuthUserController::class, 'store'])->name('registrasi.store');
+    // Route::get('/login', [AuthUserController::class, 'login'])->name('login');
+    // Route::get('/registrasi', [AuthUserController::class, 'registrasi'])->name('registrasi');
 });
 
 Route::middleware(['auth', 'permission:read'])->group(function () {
@@ -72,10 +81,10 @@ Route::middleware(['auth', 'permission:read'])->group(function () {
     //     return redirect()->route('dashboard');
     // });
     // Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('/aktivitas', [ActivitiesController::class, 'index'])->name('aktivitas');
-    Route::get('/calendar', [ActivitiesController::class, 'calendar'])->name('calendar');
-    Route::get('/profil', [ProfilController::class, 'index'])->name('profil.index');
-    Route::put('/profil', [ProfilController::class, 'update'])->name('profil.update');
+    // Route::get('/aktivitas', [ActivitiesController::class, 'index'])->name('aktivitas');
+    // Route::get('/calendar', [ActivitiesController::class, 'calendar'])->name('calendar');
+    // Route::get('/profil', [ProfilController::class, 'index'])->name('profil.index');
+    // Route::put('/profil', [ProfilController::class, 'update'])->name('profil.update');
     Route::post('/logout', [AuthUserController::class, 'logout'])->name('logout');
 
     // Route::resource('/pengurus', PengurusController::class)->except(['create']);

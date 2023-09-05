@@ -7,9 +7,16 @@ use App\Models\User;
 use Livewire\Component;
 use App\Models\Division;
 use App\Models\Committee;
+use Illuminate\Http\Request;
+use Livewire\Attributes\Title;
+use Illuminate\Support\Facades\Auth;
+
+#[Title('Dashboard')]
 
 class Dashboard extends Component
 {
+    protected $listeners = ['logout'];
+
     protected $users;
     protected $userCount;
     protected $divisions;
@@ -32,4 +39,11 @@ class Dashboard extends Component
             'committees' => $this->committees
         ]);
     }
+
+    // public function logout()
+    // {
+    //     Auth::logout();
+
+    //     return redirect()->route('login')->with('success', 'Sampai jumpa');
+    // }
 }

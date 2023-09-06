@@ -12,7 +12,7 @@
                         <p class="lead">You almost arrived, complete the information about your account to complete
                             registration.</p>
                         <div class="mt-4">
-                            <a href="{{ route('profil.index') }}"
+                            <a wire:navigate href="{{ route('profil.index') }}"
                                 class="btn btn-outline-white btn-lg btn-icon icon-left"><i class="far fa-user"></i>
                                 Setup Account</a>
                         </div>
@@ -21,4 +21,8 @@
             </div>
         </div>
     </section>
+
+    @push('script')
+    <script></script>
+    @endpush
 </div>

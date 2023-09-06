@@ -29,41 +29,42 @@
                             </thead>
                             <tbody>
                                 @forelse ($users as $user)
-                                    @props(['id' => $user->id])
-                                    <tr wire:key="{{ $user->id }}">
-                                        <th scope="row">{{ $loop->iteration }}</th>
-                                        <td>{{ $user->name }}</td>
-                                        <td>
-                                            {{-- {{ $user->division_id ? $user->divisions->name : 'Edit data untuk menambahkan divisi' }} --}}
-                                            {{ $user->divisions->name ?? 'Edit data untuk menambahkan divisi' }}
-                                        </td>
-                                        <td>{{ $user->position }}</td>
-                                        <td colspan="3">
-                                            @can('show')
-                                                <a wire:navigate href="{{ route('pengurus.show', $user->id) }}"
-                                                    class="btn btn-success"><i class="fas fa-eye"></i> Detail</a> |
-                                            @endcan
-                                            @can('update')
-                                                <a wire:navigate href="{{ route('pengurus.edit', $user->id) }}"
-                                                    class="btn btn-info"><i class="fas fa-pen"></i> Edit</a> |
-                                            @endcan
-                                            @can('delete')
-                                                {{-- <form wire:submit='destroy({{ $user->id }})' class="d-inline">
-                                                    <input type="text" wire:model='id' value="{{ $id }}">
-                                                    <button type="submit" class="btn btn-danger"
-                                                        id="delete-{{ $loop->iteration }}"><i class="fas fa-trash"></i>
-                                                        Delete</button>
-                                                </form> --}}
-                                                <button class="btn btn-danger" wire:click='destroy({{ $user->id }})'
-                                                    id="delete-{{ $loop->iteration }}"><i class="fas fa-trash"></i>
-                                                    Delete</button>
-                                            @endcan
-                                        </td>
-                                    </tr>
+                                @props(['id' => $user->id])
+                                <tr wire:key="{{ $user->id }}">
+                                    <th scope="row">{{ $loop->iteration }}</th>
+                                    <td>{{ $user->name }}</td>
+                                    <td>
+                                        {{-- {{ $user->division_id ? $user->divisions->name : 'Edit data untuk
+                                        menambahkan divisi' }} --}}
+                                        {{ $user->divisions->name ?? 'Edit data untuk menambahkan divisi' }}
+                                    </td>
+                                    <td>{{ $user->position }}</td>
+                                    <td colspan="3">
+                                        @can('show')
+                                        <a wire:navigate href="{{ route('pengurus.show', $user->id) }}"
+                                            class="btn btn-success"><i class="fas fa-eye"></i> Detail</a> |
+                                        @endcan
+                                        @can('update')
+                                        <a wire:navigate href="{{ route('pengurus.edit', $user->id) }}"
+                                            class="btn btn-info"><i class="fas fa-pen"></i> Edit</a> |
+                                        @endcan
+                                        @can('delete')
+                                        {{-- <form wire:submit='destroy({{ $user->id }})' class="d-inline">
+                                            <input type="text" wire:model='id' value="{{ $id }}">
+                                            <button type="submit" class="btn btn-danger"
+                                                id="delete-{{ $loop->iteration }}"><i class="fas fa-trash"></i>
+                                                Delete</button>
+                                        </form> --}}
+                                        <button class="btn btn-danger" wire:click.prefetch='destroy({{ $user->id }})'
+                                            id="delete-{{ $loop->iteration }}"><i class="fas fa-trash"></i>
+                                            Delete</button>
+                                        @endcan
+                                    </td>
+                                </tr>
                                 @empty
-                                    <tr>
-                                        <td>Saat ini data belum tersedia</td>
-                                    </tr>
+                                <tr>
+                                    <td>Saat ini data belum tersedia</td>
+                                </tr>
                                 @endforelse
                             </tbody>
                         </table>
@@ -110,8 +111,8 @@
     </div>
 
     @push('script')
-        <script type="text/javascript">
-            window.addEventListener('swal:success', event => {
+    <script type="text/javascript">
+        window.addEventListener('swal:success', event => {
                 event.preventDefault
                 swal({
                     title: event.detail[0].title,
@@ -142,12 +143,12 @@
                         })
                     } else {
                         // location.reload();
-                        Livewire.dispatch('index', {
+                        Livewire.dispatch('indexPengurus', {
                             id: event.detail[0].id
                         })
                     }
                 });
             })
-        </script>
+    </script>
     @endpush
 </div>

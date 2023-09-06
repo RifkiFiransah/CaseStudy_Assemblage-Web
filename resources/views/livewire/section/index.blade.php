@@ -27,30 +27,30 @@
                             </thead>
                             <tbody>
                                 @forelse ($sections as $seksi)
-                                    <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $seksi->name }}</td>
-                                        <td colspan="3">
-                                            @can('show')
-                                                <a wire:navigate href="{{ route('section.show', $seksi->id) }}"
-                                                    class="btn btn-success"><i class="fas fa-eye"></i> Detail</a> |
-                                            @endcan
-                                            @can('update')
-                                                <a wire:navigate href="{{ route('section.edit', $seksi->id) }}"
-                                                    class="btn btn-info"><i class="fas fa-pen"></i> Edit</a> |
-                                            @endcan
-                                            @can('delete')
-                                                <button type="submit" wire:click='destroy({{ $seksi->id }})'
-                                                    class="btn btn-danger" id="delete-{{ $seksi->id }}"><i
-                                                        class="fas fa-trash"></i>
-                                                    Delete</button>
-                                            @endcan
-                                        </td>
-                                    </tr>
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $seksi->name }}</td>
+                                    <td colspan="3">
+                                        @can('show')
+                                        <a wire:navigate href="{{ route('section.show', $seksi->id) }}"
+                                            class="btn btn-success"><i class="fas fa-eye"></i> Detail</a> |
+                                        @endcan
+                                        @can('update')
+                                        <a wire:navigate href="{{ route('section.edit', $seksi->id) }}"
+                                            class="btn btn-info"><i class="fas fa-pen"></i> Edit</a> |
+                                        @endcan
+                                        @can('delete')
+                                        <button type="submit" wire:click.prefetch='destroy({{ $seksi->id }})'
+                                            class="btn btn-danger" id="delete-{{ $seksi->id }}"><i
+                                                class="fas fa-trash"></i>
+                                            Delete</button>
+                                        @endcan
+                                    </td>
+                                </tr>
                                 @empty
-                                    <tr>
-                                        <td colspan="3" class="text-center">Data saat ini belum tersedia</td>
-                                    </tr>
+                                <tr>
+                                    <td colspan="3" class="text-center">Data saat ini belum tersedia</td>
+                                </tr>
                                 @endforelse
                             </tbody>
                         </table>
@@ -83,8 +83,8 @@
     </div>
 
     @push('script')
-        <script>
-            window.addEventListener('swal:success', event => {
+    <script>
+        window.addEventListener('swal:success', event => {
                 event.preventDefault
                 swal({
                     title: event.detail[0].title,
@@ -120,6 +120,6 @@
                     }
                 })
             })
-        </script>
+    </script>
     @endpush
 </div>

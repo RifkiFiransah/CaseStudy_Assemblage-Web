@@ -31,7 +31,7 @@ class Edit extends Component
     #[Rule('required')]
     public $user_id;
 
-    #[Rule('')]
+    #[Rule('required')]
     public $tema;
 
     public function mount()

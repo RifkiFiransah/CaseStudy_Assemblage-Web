@@ -29,32 +29,32 @@
                             </thead>
                             <tbody>
                                 @forelse ($kepanitiaan as $panitia)
-                                    <tr>
-                                        <th scope="row">{{ $loop->iteration }}</th>
-                                        <td>{{ $panitia->tasks->name }}</td>
-                                        <td>{{ $panitia->sections->name }}</td>
-                                        <td>{{ $panitia->users->name }}</td>
-                                        <td colspan="3">
-                                            @can('show')
-                                                <a wire:navigate href="{{ route('kepanitiaan.show', $panitia->id) }}"
-                                                    class="btn btn-success"><i class="fas fa-eye"></i> Detail</a> |
-                                            @endcan
-                                            @can('update')
-                                                <a wire:navigate href="{{ route('kepanitiaan.edit', $panitia->id) }}"
-                                                    class="btn btn-info"><i class="fas fa-pen"></i> Edit</a> |
-                                            @endcan
-                                            @can('delete')
-                                                <button wire:click='destroy({{ $panitia->id }})' type="submit"
-                                                    class="btn btn-danger" id="delete-{{ $loop->iteration }}"><i
-                                                        class="fas fa-trash"></i>
-                                                    Delete</button>
-                                            @endcan
-                                        </td>
-                                    </tr>
+                                <tr>
+                                    <th scope="row">{{ $loop->iteration }}</th>
+                                    <td>{{ $panitia->tasks->name }}</td>
+                                    <td>{{ $panitia->sections->name }}</td>
+                                    <td>{{ $panitia->users->name }}</td>
+                                    <td colspan="3">
+                                        @can('show')
+                                        <a wire:navigate href="{{ route('kepanitiaan.show', $panitia->id) }}"
+                                            class="btn btn-success"><i class="fas fa-eye"></i> Detail</a> |
+                                        @endcan
+                                        @can('update')
+                                        <a wire:navigate href="{{ route('kepanitiaan.edit', $panitia->id) }}"
+                                            class="btn btn-info"><i class="fas fa-pen"></i> Edit</a> |
+                                        @endcan
+                                        @can('delete')
+                                        <button wire:click.prefetch='destroy({{ $panitia->id }})' type="submit"
+                                            class="btn btn-danger" id="delete-{{ $loop->iteration }}"><i
+                                                class="fas fa-trash"></i>
+                                            Delete</button>
+                                        @endcan
+                                    </td>
+                                </tr>
                                 @empty
-                                    <tr>
-                                        <td colspan="6" class="text-center">Saat ini data belum tersedia</td>
-                                    </tr>
+                                <tr>
+                                    <td colspan="6" class="text-center">Saat ini data belum tersedia</td>
+                                </tr>
                                 @endforelse
                             </tbody>
                         </table>
@@ -78,9 +78,9 @@
                             <select class="form-control selectric" wire:model="task_id">
                                 <option disabled selected>Pilih Program Kerja</option>
                                 @forelse ($tasks as $proker)
-                                    <option value="{{ $proker->id }}">{{ $proker->name }}</option>
+                                <option value="{{ $proker->id }}">{{ $proker->name }}</option>
                                 @empty
-                                    <option disabled>Data saat ini belum tersedia</option>
+                                <option disabled>Data saat ini belum tersedia</option>
                                 @endforelse
                             </select>
                         </div>
@@ -89,9 +89,9 @@
                             <select class="form-control selectric" wire:model="user_id">
                                 <option disabled selected>Pilih Pengurus</option>
                                 @forelse ($users as $user)
-                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                <option value="{{ $user->id }}">{{ $user->name }}</option>
                                 @empty
-                                    <option disabled>Data saat ini belum tersedia</option>
+                                <option disabled>Data saat ini belum tersedia</option>
                                 @endforelse
                             </select>
                         </div>
@@ -100,9 +100,9 @@
                             <select class="form-control selectric" wire:model="section_id">
                                 <option disabled selected>Pilih Seksi</option>
                                 @forelse ($sections as $seksi)
-                                    <option value="{{ $seksi->id }}">{{ $seksi->name }}</option>
+                                <option value="{{ $seksi->id }}">{{ $seksi->name }}</option>
                                 @empty
-                                    <option disabled>Data saat ini belum tersedia</option>
+                                <option disabled>Data saat ini belum tersedia</option>
                                 @endforelse
                             </select>
                         </div>
@@ -122,8 +122,8 @@
     </div>
 
     @push('script')
-        <script>
-            window.addEventListener('swal:confirm', event => {
+    <script>
+        window.addEventListener('swal:confirm', event => {
                 event.preventDefault
                 swal({
                     title: event.detail[0].title,
@@ -143,6 +143,6 @@
                     }
                 })
             })
-        </script>
+    </script>
     @endpush
 </div>

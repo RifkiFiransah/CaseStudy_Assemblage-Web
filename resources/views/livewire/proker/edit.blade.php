@@ -28,14 +28,14 @@
                                     <div class="col-sm-12 col-md-7">
                                         <select class="form-control selectric" wire:model="division_id">
                                             @forelse ($divisions as $divisi)
-                                                @if ($proker->division_id == $divisi->id)
-                                                    <option value="{{ $divisi->id }}" selected>{{ $divisi->name }}
-                                                    </option>
-                                                @else
-                                                    <option value="{{ $divisi->id }}">{{ $divisi->name }}</option>
-                                                @endif
+                                            @if ($proker->division_id == $divisi->id)
+                                            <option value="{{ $divisi->id }}" selected>{{ $divisi->name }}
+                                            </option>
+                                            @else
+                                            <option value="{{ $divisi->id }}">{{ $divisi->name }}</option>
+                                            @endif
                                             @empty
-                                                <option disabled>Divisi Belum Tersedia</option>
+                                            <option disabled>Divisi Belum Tersedia</option>
                                             @endforelse
                                         </select>
                                     </div>
@@ -46,14 +46,14 @@
                                     <div class="col-sm-12 col-md-7">
                                         <select class="form-control selectric" wire:model="user_id">
                                             @forelse ($users as $user)
-                                                @if ($proker->user_id == $user->id)
-                                                    <option value="{{ $user->id }}" selected>{{ $user->name }}
-                                                    </option>
-                                                @else
-                                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
-                                                @endif
+                                            @if ($proker->user_id == $user->id)
+                                            <option value="{{ $user->id }}" selected>{{ $user->name }}
+                                            </option>
+                                            @else
+                                            <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                            @endif
                                             @empty
-                                                <option disabled>Ketua Pelaksana Belum Tersedia</option>
+                                            <option disabled>Ketua Pelaksana Belum Tersedia</option>
                                             @endforelse
                                         </select>
                                     </div>
@@ -62,15 +62,15 @@
                                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Status</label>
                                     <div class="col-sm-12 col-md-7">
                                         <select class="form-control selectric" wire:model="status">
-                                            <option value="progress"
-                                                {{ $proker->status == 'progress' ? 'selected' : '' }}>
+                                            <option value="progress" {{ $proker->status == 'progress' ? 'selected' : ''
+                                                }}>
                                                 Proses
                                             </option>
                                             <option value="cancel" {{ $proker->status == 'cancel' ? 'selected' : '' }}>
                                                 Belum
                                             </option>
-                                            <option value="success"
-                                                {{ $proker->status == 'success' ? 'selected' : '' }}>Berhasil</option>
+                                            <option value="success" {{ $proker->status == 'success' ? 'selected' : ''
+                                                }}>Berhasil</option>
                                         </select>
                                     </div>
                                 </div>
@@ -83,9 +83,11 @@
                                     </div>
                                 </div>
                                 <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Tema</label>
+                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Tema {{ $tema
+                                        }}</label>
                                     <div class="col-sm-12 col-md-7">
-                                        <textarea class="form-control" id="summernote" wire:model="tema">{{ $proker->tema }}</textarea>
+                                        <textarea class="form-control" id="summer-note"
+                                            wire:model="tema">{{ $tema }}</textarea>
                                     </div>
                                 </div>
                                 <div class="form-group row mb-4">
@@ -105,8 +107,8 @@
     </section>
 
     @push('script')
-        <script type="text/javascript">
-            $('#summernote').summernote({
+    <script type="text/javascript">
+        $('#summer-note').summernote({
                 tabsize: 2,
                 height: 130,
                 toolbar: [
@@ -120,6 +122,6 @@
                     }
                 }
             });
-        </script>
+    </script>
     @endpush
 </div>

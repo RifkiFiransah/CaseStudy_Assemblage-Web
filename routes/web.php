@@ -22,6 +22,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::middleware('guest')->group(function () {
+    Route::get('/login', App\Livewire\Login::class)->name('login');
+    Route::get('/registrasi', App\Livewire\Registrasi::class)->name('registrasi');
+});
+
 
 Route::middleware(['auth', 'permission:read'])->group(function () {
     Route::get('/home', App\Livewire\Home::class)->name('home');
@@ -31,8 +36,8 @@ Route::middleware(['auth', 'permission:read'])->group(function () {
     Route::get('/dashboard', App\Livewire\Dashboard::class)->name('dashboard');
 
     Route::get('/pengurus', App\Livewire\Pengurus\Index::class)->name('pengurus.index');
-    Route::get('/pengurus/{pengurus}', App\Livewire\Pengurus\Show::class)->name('pengurus.show');
-    Route::get('/pengurus/{pengurus}/edit', App\Livewire\Pengurus\Edit::class)->name('pengurus.edit');
+    Route::get('/pengurus/{user}', App\Livewire\Pengurus\Show::class)->name('pengurus.show');
+    Route::get('/pengurus/{user}/edit', App\Livewire\Pengurus\Edit::class)->name('pengurus.edit');
 
     Route::get('/divisi', App\Livewire\Divisi\Index::class)->name('divisi.index');
     Route::get('/divisi/{divisi}', App\Livewire\Divisi\Show::class)->name('divisi.show');
@@ -67,16 +72,16 @@ Route::middleware(['auth', 'permission:read'])->group(function () {
 //     ]);
 // })->name('home');
 
-Route::middleware('guest')->group(function () {
-    Route::get('/login', App\Livewire\Login::class)->name('login');
-    Route::get('/registrasi', App\Livewire\Registrasi::class)->name('registrasi');
+// Route::middleware('guest')->group(function () {
+//     Route::get('/login', App\Livewire\Login::class)->name('login');
+//     Route::get('/registrasi', App\Livewire\Registrasi::class)->name('registrasi');
     // Route::post('/login', [AuthUserController::class, 'auth'])->name('auth');
     // Route::post('/registrasi', [AuthUserController::class, 'store'])->name('registrasi.store');
     // Route::get('/login', [AuthUserController::class, 'login'])->name('login');
     // Route::get('/registrasi', [AuthUserController::class, 'registrasi'])->name('registrasi');
-});
+// });
 
-Route::middleware(['auth', 'permission:read'])->group(function () {
+// Route::middleware(['auth', 'permission:read'])->group(function () {
     // Route::get('/', function () {
     //     return redirect()->route('dashboard');
     // });
@@ -85,11 +90,11 @@ Route::middleware(['auth', 'permission:read'])->group(function () {
     // Route::get('/calendar', [ActivitiesController::class, 'calendar'])->name('calendar');
     // Route::get('/profil', [ProfilController::class, 'index'])->name('profil.index');
     // Route::put('/profil', [ProfilController::class, 'update'])->name('profil.update');
-    Route::post('/logout', [AuthUserController::class, 'logout'])->name('logout');
+    // Route::post('/logout', [AuthUserController::class, 'logout'])->name('logout');
 
     // Route::resource('/pengurus', PengurusController::class)->except(['create']);
     // Route::resource('/divisi', DivisionController::class)->except(['create']);
     // Route::resource('/proker', TaskController::class)->except(['create']);
     // Route::resource('/seksi-seksi', SectionController::class)->except(['create']);
     // Route::resource('/kepanitiaan', CommitteeController::class)->except(['create']);
-});
+// });

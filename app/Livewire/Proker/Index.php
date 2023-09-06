@@ -12,7 +12,7 @@ use Livewire\Attributes\Title;
 #[Title('Proker')]
 class Index extends Component
 {
-    protected $listeners = ['deleteProker', 'index' => 'render'];
+    protected $listeners = ['deleteProker', 'indexProker'];
 
     #[Rule('required', 'max:100', 'unique:tasks')]
     public $name;
@@ -35,6 +35,11 @@ class Index extends Component
             'users' => $users,
             'tasks' => $tasks
         ]);
+    }
+
+    public function indexProker()
+    {
+        return redirect()->route('proker.index');
     }
 
     public function storeProker()

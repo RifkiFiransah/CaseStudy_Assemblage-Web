@@ -41,15 +41,23 @@
                 },
                 editable: true,
                 events: [
-                    @foreach ($tasks as $proker)
-                        {
-                            title: `{{ $proker->name }}`,
-                            date: `{{ $proker->tanggal }}`,
-                            backgroundColor: "#007bff",
-                            borderColor: "#007bff",
-                            textColor: '#fff',
-                        },
-                    @endforeach
+                    // @foreach($tasks as $proker)
+                        // {
+                        //     title: {{ $proker->name }},
+                        //     date: {{ $proker->tanggal }},
+                        //     backgroundColor: "#007bff",
+                        //     borderColor: "#007bff",
+                        //     textColor: '#fff',
+                        // },
+                        // console.log($proker);
+                    // @endforeach
+                        // {
+                        //     title: "makrab",
+                        //     date: "2023-09-25",
+                        //     backgroundColor: "#007bff",
+                        //     borderColor: "#007bff",
+                        //     textColor: '#fff',
+                        // },
                 ]
             });
     </script>

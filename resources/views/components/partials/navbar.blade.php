@@ -175,11 +175,7 @@
                     <i class="far fa-user"></i> Profile
                 </a>
                 <div class="dropdown-divider"></div>
-                <form wire:submit='logout' class="d-inline">
-                    <button type="submit" class="dropdown-item text-danger border-0">
-                        <i class="fas fa-sign-out-alt mr-2"></i> Logout
-                    </button>
-                </form>
+                <livewire:logout>
             </div>
         </li>
     </ul>

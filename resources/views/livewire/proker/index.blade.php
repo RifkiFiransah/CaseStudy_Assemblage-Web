@@ -30,44 +30,44 @@
                             </thead>
                             <tbody>
                                 @forelse ($tasks as $proker)
-                                    <tr>
-                                        <th scope="row">{{ $loop->iteration }}</th>
-                                        <td>{{ $proker->name }}</td>
-                                        <td>{{ $proker->users->name }}</td>
-                                        {{-- @switch($proker->status)
-                                            @case('progress')
-                                                <td class="badge badge-warning p-2 mt-2">{{ $proker->status }}</td>
-                                            @break
+                                <tr>
+                                    <th scope="row">{{ $loop->iteration }}</th>
+                                    <td>{{ $proker->name }}</td>
+                                    <td>{{ $proker->users->name }}</td>
+                                    {{-- @switch($proker->status)
+                                    @case('progress')
+                                    <td class="badge badge-warning p-2 mt-2">{{ $proker->status }}</td>
+                                    @break
 
-                                            @case('success')
-                                                <td class="badge badge-success p-2 mt-2">{{ $proker->status }}</td>
-                                            @break
+                                    @case('success')
+                                    <td class="badge badge-success p-2 mt-2">{{ $proker->status }}</td>
+                                    @break
 
-                                            @default
-                                                <td class="badge badge-danger p-2 mt-2">{{ $proker->status }}</td>
-                                        @endswitch --}}
-                                        <td>{{ $proker->tanggal }}</td>
-                                        <td colspan="2">
-                                            @can('show')
-                                                <a wire:navigate href="{{ route('proker.show', $proker->id) }}"
-                                                    class="btn btn-success"><i class="fas fa-eye"></i> Detail</a> |
-                                            @endcan
-                                            @can('update')
-                                                <a wire:navigate href="{{ route('proker.edit', $proker->id) }}"
-                                                    class="btn btn-info"><i class="fas fa-pen"></i> Edit</a> |
-                                            @endcan
-                                            @can('delete')
-                                                <button type="submit" class="btn btn-danger"
-                                                    wire:click='destroy({{ $proker->id }})'
-                                                    id="delete-{{ $loop->iteration }}"><i class="fas fa-trash"></i>
-                                                    Delete</button>
-                                            @endcan
-                                        </td>
-                                    </tr>
+                                    @default
+                                    <td class="badge badge-danger p-2 mt-2">{{ $proker->status }}</td>
+                                    @endswitch --}}
+                                    <td>{{ $proker->tanggal }}</td>
+                                    <td colspan="2">
+                                        @can('show')
+                                        <a wire:navigate href="{{ route('proker.show', $proker->id) }}"
+                                            class="btn btn-success"><i class="fas fa-eye"></i> Detail</a> |
+                                        @endcan
+                                        @can('update')
+                                        <a wire:navigate href="{{ route('proker.edit', $proker->id) }}"
+                                            class="btn btn-info"><i class="fas fa-pen"></i> Edit</a> |
+                                        @endcan
+                                        @can('delete')
+                                        <button type="submit" class="btn btn-danger"
+                                            wire:click.prefetch='destroy({{ $proker->id }})'
+                                            id="delete-{{ $loop->iteration }}"><i class="fas fa-trash"></i>
+                                            Delete</button>
+                                        @endcan
+                                    </td>
+                                </tr>
                                 @empty
-                                    <tr>
-                                        <td>Belum ada data yang tersedia</td>
-                                    </tr>
+                                <tr>
+                                    <td>Belum ada data yang tersedia</td>
+                                </tr>
                                 @endforelse
                             </tbody>
                         </table>
@@ -88,7 +88,7 @@
                             <label>Nama Proker</label>
                             <input type="text" class="form-control" wire:model="name" value="" required>
                             {{-- <div class="valid-feedback">
-                  </div> --}}
+                            </div> --}}
                         </div>
                         <div class="form-group">
                             <label>Tanggal Pelaksanaan</label>
@@ -99,9 +99,9 @@
                             <select class="form-control selectric" wire:model="division_id">
                                 <option disabled selected>Pilih Proker Divisi</option>
                                 @forelse ($divisions as $divisi)
-                                    <option value="{{ $divisi->id }}">{{ $divisi->name }}</option>
+                                <option value="{{ $divisi->id }}">{{ $divisi->name }}</option>
                                 @empty
-                                    <option disabled>Divisi saat ini belum tersedia</option>
+                                <option disabled>Divisi saat ini belum tersedia</option>
                                 @endforelse
                             </select>
                         </div>
@@ -110,9 +110,9 @@
                             <select class="form-control selectric" wire:model="user_id">
                                 <option disabled selected>Pilih Ketua Pelaksana</option>
                                 @forelse ($users as $user)
-                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                <option value="{{ $user->id }}">{{ $user->name }}</option>
                                 @empty
-                                    <option disabled>Pengurus saat ini belum tersedia</option>
+                                <option disabled>Pengurus saat ini belum tersedia</option>
                                 @endforelse
                             </select>
                         </div>
@@ -132,8 +132,8 @@
         </div>
     </div>
     @push('script')
-        <script type="text/javascript">
-            window.addEventListener('swal:success', event => {
+    <script type="text/javascript">
+        window.addEventListener('swal:success', event => {
                 event.preventDefault
                 swal({
                     title: event.detail[0].title,
@@ -170,6 +170,6 @@
                     }
                 });
             })
-        </script>
+    </script>
     @endpush
 </div>

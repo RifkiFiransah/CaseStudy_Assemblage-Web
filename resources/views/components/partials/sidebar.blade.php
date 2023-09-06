@@ -42,7 +42,8 @@
             </x-nav-link>
 
             <li class="menu-header">Personal</li>
-            <x-nav-link :active="Request()->is('profil*')" href="{{ route('profil.index') }}" :icon="'fas fa-user'">
+            <x-nav-link :active="Request()->is('profil*')" wire:navigate href="{{ route('profil.index') }}"
+                :icon="'fas fa-user'">
                 Profil
             </x-nav-link>
 

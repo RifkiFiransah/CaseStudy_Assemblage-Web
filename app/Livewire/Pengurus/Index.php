@@ -14,16 +14,29 @@ class Index extends Component
 {
     public $users;
     protected $listeners = [
-        // 'delete',
-        'index' => 'render'
+        'delete',
+        'indexPengurus'
     ];
 
-    #[On('delete')]
-    public function updateList($user)
-    {
-    }
+    // #[On('delete')]
+    // public function updateList($user)
+    // {
+    // }
 
     public PengurusForm $form;
+
+    public function render()
+    {
+        $this->users = User::with(['divisions'])->latest()->get();
+        return view('livewire.pengurus.index', [
+            'users' => $this->users
+        ]);
+    }
+
+    public function indexPengurus()
+    {
+        return redirect()->route('pengurus.index');
+    }
 
     public function store()
     {
@@ -63,14 +76,6 @@ class Index extends Component
             "title" => 'Berhasil',
             "text" => 'Berhasil menghapus pengurus baru',
             "icon" => 'success',
-        ]);
-    }
-
-    public function render()
-    {
-        $this->users = User::with(['divisions'])->latest()->get();
-        return view('livewire.pengurus.index', [
-            'users' => $this->users
         ]);
     }
 }

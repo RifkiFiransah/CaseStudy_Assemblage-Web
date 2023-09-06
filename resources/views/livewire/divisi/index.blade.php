@@ -29,29 +29,29 @@
                             </thead>
                             <tbody>
                                 @foreach ($divisions as $divisi)
-                                    <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $divisi->name }}</td>
-                                        <td>{!! $divisi->description !!}</td>
-                                        <td>
-                                            {{ $divisi->leader ? $divisi->leader : 'Edit untuk menambahkan kepala divisi' }}
-                                        </td>
-                                        <td colspan="3">
-                                            @can('show')
-                                                <a href="{{ route('divisi.show', $divisi->id) }}" class="btn btn-success"><i
-                                                        class="fas fa-eye"></i> Detail</a> |
-                                            @endcan
-                                            @can('update')
-                                                <a href="{{ route('divisi.edit', $divisi->id) }}" class="btn btn-info"><i
-                                                        class="fas fa-pen"></i> Edit</a> |
-                                            @endcan
-                                            @can('delete')
-                                                <button class="btn btn-danger" wire:click='destroy({{ $divisi->id }})'
-                                                    id="delete-{{ $loop->iteration }}"><i class="fas fa-trash"></i>
-                                                    Delete</button>
-                                            @endcan
-                                        </td>
-                                    </tr>
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $divisi->name }}</td>
+                                    <td>{!! $divisi->description !!}</td>
+                                    <td>
+                                        {{ $divisi->leader ? $divisi->leader : 'Edit untuk menambahkan kepala divisi' }}
+                                    </td>
+                                    <td colspan="3">
+                                        @can('show')
+                                        <a href="{{ route('divisi.show', $divisi->id) }}" class="btn btn-success"><i
+                                                class="fas fa-eye"></i> Detail</a> |
+                                        @endcan
+                                        @can('update')
+                                        <a href="{{ route('divisi.edit', $divisi->id) }}" class="btn btn-info"><i
+                                                class="fas fa-pen"></i> Edit</a> |
+                                        @endcan
+                                        @can('delete')
+                                        <button class="btn btn-danger" wire:click.prefetch='destroy({{ $divisi->id }})'
+                                            id="delete-{{ $loop->iteration }}"><i class="fas fa-trash"></i>
+                                            Delete</button>
+                                        @endcan
+                                    </td>
+                                </tr>
                                 @endforeach
                             </tbody>
                         </table>
@@ -78,9 +78,9 @@
                             <select class="form-control selectric" wire:model="leader">
                                 <option disabled selected>Pilih Kepala Divisi</option>
                                 @forelse ($users as $user)
-                                    <option value="{{ $user->name }}">{{ $user->name }}</option>
+                                <option value="{{ $user->name }}">{{ $user->name }}</option>
                                 @empty
-                                    <option disabled>Kepala Divisi Belum Tersedia</option>
+                                <option disabled>Kepala Divisi Belum Tersedia</option>
                                 @endforelse
                             </select>
                         </div>
@@ -88,7 +88,8 @@
                             <label>Description : {{ $description }}</label>
                             <div>
                                 <textarea class="form-control" wire:model="description" rows="3"></textarea>
-                                {{-- <textarea class="form-control summernote-simple" wire:model="description">{{ $description }}</textarea> --}}
+                                {{-- <textarea class="form-control summernote-simple"
+                                    wire:model="description">{{ $description }}</textarea> --}}
                             </div>
                         </div>
                         <button class="btn btn-primary">Submit</button>
@@ -99,8 +100,8 @@
     </div>
 
     @push('script')
-        <script type="text/javascript">
-            $('#summernote').summernote({
+    <script type="text/javascript">
+        $('#summernote').summernote({
                 tabsize: 2,
                 height: 130,
                 toolbar: [
@@ -151,6 +152,6 @@
                     }
                 });
             })
-        </script>
+    </script>
     @endpush
 </div>

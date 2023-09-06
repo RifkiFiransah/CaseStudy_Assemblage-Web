@@ -6,6 +6,7 @@ use App\Models\Committee;
 use App\Models\Section;
 use App\Models\Task;
 use App\Models\User;
+use Illuminate\Support\Facades\Blade;
 use Livewire\Attributes\Rule;
 use Livewire\Attributes\Title;
 use Livewire\Component;
@@ -17,7 +18,7 @@ class Index extends Component
     public $sections;
     public $users;
     public $tasks;
-    protected $listeners = ['indexPanitia' => 'render', 'deletePanitia'];
+    protected $listeners = ['indexPanitia', 'deletePanitia'];
 
     #[Rule('required')]
     public $user_id;
@@ -42,6 +43,11 @@ class Index extends Component
     public function render()
     {
         return view('livewire.kepanitiaan.index');
+    }
+
+    public function indexPanitia()
+    {
+        return redirect()->route('kepanitiaan.index');
     }
 
     public function store()

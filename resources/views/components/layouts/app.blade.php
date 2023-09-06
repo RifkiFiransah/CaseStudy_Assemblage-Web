@@ -27,7 +27,7 @@
     @else
     @include('components.layouts.header')
     @endif
-
+    @livewireStyles
     @vite(['resources/js/app.js', 'resources/css/app.css'])
 </head>
 
@@ -55,6 +55,9 @@
         </div>
         @endif
     </div>
+
+    @livewireScripts
+    <script src="{{ mix('js/app.js') }}"></script>
 
     @if (Request::is('login') || Request::is('registrasi'))
     <!-- General JS Scripts -->
